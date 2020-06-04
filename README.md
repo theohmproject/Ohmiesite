@@ -1,2 +1,2 @@
-# OhmFusion
-glFusion theme for Ohm
+# Ohmiesit
+Website pages for ohmcoin.org

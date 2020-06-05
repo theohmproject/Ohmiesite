@@ -10,6 +10,7 @@ from datetime import datetime
 from email.mime.text import MIMEText
 from email.header import Header
 from email.utils import formataddr
+from pathlib import Path
 
 
 # Main ohm web object
@@ -21,6 +22,8 @@ class OhmRoot(object):
     hostsAgents = {}  # map of host sessions and last mail times.
     hosts = {}  # map of host sessions and last mail times.
 
+    localDir = Path(os.path.dirname(os.path.realpath(__file__))).resolve().parent
+    print( "Root Directory: " + localDir )
     _cp_config = {'error_page.404': os.path.join(localDir, "error/404.html")}
 
     @cherrypy.expose

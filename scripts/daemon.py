@@ -43,7 +43,9 @@ class OhmRoot(object):
         return ts - th
 
     def getHostHash(self, host, client):
-        return hashlib.sha256(str(host) + "::" + str(client)).hexdigest()
+        h = str(host);
+        c = str(client);
+        return hashlib.sha256(str(h + "::" + c).encode('utf-8')).hexdigest()
 
     @cherrypy.expose
     def index(self):

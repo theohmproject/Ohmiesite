@@ -38,7 +38,7 @@ function contact_form_submit(el, e) {
 
   var entries = x.entries();
   var params = "";
-  var jsonArray = [];
+  var jsonObject = {};
   entries.hasNext = function hasNext() {
     const r = this.next();
     this.current = r.value;
@@ -50,22 +50,20 @@ function contact_form_submit(el, e) {
     if (count > 0) {
         params += "&";
     }
-    item = {};
-    item["name"] = entries.current[0];
-    item["value"] = entries.current[1];
-    jsonArray.push(item);
+    jsonObject[entries.current[0]] = entries.current[1];
   }
 
-  console.log(jsonArray);
+  console.log(jsonObject);
 
   XHR.addEventListener("error", function (event) {
     console.error(event);
   });
 
-  XHR.open("POST", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/contact_submit");
+  //XHR.open("POST", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/contact_submit");
+  XHR.open("POST", window.location.protocol + "//" + window.location.hostname + ":" + "8771" + "/api/contact_submit");
 
   XHR.timeout = 7300;
   XHR.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
-  XHR.send(JSON.stringify(jsonArray));
+  XHR.send(JSON.stringify(jsonObject));
 }

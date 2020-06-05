@@ -4,16 +4,13 @@ import cherrypy
 import json
 import os
 
-# Public web directory
-PUB_DIR = "C:\\DEV\\sites\\ohm\\Ohmiesite\\public\\";
-
 # Main ohm web object
 class OhmRoot(object):
-    
-    #@cherrypy.expose
-    #def index(self):
-    #    message = { "response" : True, "status" : True, "message" : "not a web server." }
-    #    return json.dumps(message)
+
+    @cherrypy.expose
+    def index(self):
+        message = { "response" : True, "status" : True, "message" : "not a web server." }
+        return json.dumps(message)
 
     @cherrypy.expose
     def contact_submit(self):
@@ -25,27 +22,21 @@ class OhmRoot(object):
         rawbody = cherrypy.request.body.read(int(cl))
         body = json.loads(rawbody)
         # process form data..
-        
-        # TODO: process input!!!
-        
+        captcha = body['g-recaptcha-response']
+        name = body['Name']
+        email = body['Email']
+        message = body['Message']
+        print ( "RECEIVED FROM: " + email + "  MESSAGE: " + message )
+        # TODO: send mail
+
         # send response
         message = { "response" : True, "status" : True, "message" : "message sent!" }
         return json.dumps(message)
 
     @cherrypy.expose
-    def shutdown(self):  
+    def shutdown(self):
         cherrypy.engine.exit()
 
-
-##############################################
-# Serve all files in public directory
-conf = { '/':
-    {
-        'tools.staticdir.on': True,
-        'tools.staticdir.dir': PUB_DIR,
-        'tools.staticdir.index': 'index.html',
-    },
-}
 
 # listen on alt port
 cherrypy.server.socket_port = 8771
@@ -54,4 +45,3 @@ cherrypy.server.socket_host = '0.0.0.0'
 
 # start the webserver!
 cherrypy.quickstart( OhmRoot(), config = conf )
-

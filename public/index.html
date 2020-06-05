@@ -387,34 +387,34 @@
 <div class="uk-background-cover" style="background-image: url('images/photo.jpg');" uk-height-viewport></div>
 <div class="uk-padding-large">
 
-<script src='https://www.google.com/recaptcha/api.js'></script>
+	<div id="contact_form_container">
+		<script src='https://www.google.com/recaptcha/api.js'></script>
 
-<form  method="post" id="contact_form" onsubmit="contact_form_submit(this, event);">
-<fieldset class="uk-fieldset">
-  <legend class="uk-legend">Contact Us</legend>
+		<form  method="post" id="contact_form" onsubmit="contact_form_submit(this, event);">
+			<fieldset class="uk-fieldset">
+			  <legend class="uk-legend">Contact Us</legend>
 
-      <div class="uk-margin">
-      <input class="uk-input" id="name" type="text" name="Name" placeholder="Name" required maxlength="50">
-      </div>
+			      <div class="uk-margin">
+			      <input class="uk-input" id="name" type="text" name="Name" placeholder="Name" required maxlength="50">
+			      </div>
 
-      <div class="uk-margin">
-      <input class="uk-input" id="email" type="email" name="Email" placeholder="Email" required maxlength="50">
-      </div>
+			      <div class="uk-margin">
+			      <input class="uk-input" id="email" type="email" name="Email" placeholder="Email" required maxlength="50">
+			      </div>
 
-      <div class="uk-margin">
-      <textarea class="uk-textarea" id="message" name="Message" placeholder="Message" rows="10" maxlength="6000" required></textarea>
-      </div>
+			      <div class="uk-margin">
+			      <textarea class="uk-textarea" id="message" name="Message" placeholder="Message" rows="10" maxlength="6000" required></textarea>
+			      </div>
 
+            <div class="g-recaptcha" data-sitekey="6LdVSZ0UAAAAAH_HJqJoiOSlvkUTKGTuIDYfkS9C"></div>
 
+			      <div class="uk-margin">
+			      <button class="uk-button uk-button-primary uk-border-pill" type="submit" >Post</button>
+			      </div>
 
-                <div class="g-recaptcha" data-sitekey="6LdVSZ0UAAAAAH_HJqJoiOSlvkUTKGTuIDYfkS9C"></div>
-
-      <div class="uk-margin">
-      <button class="uk-button uk-button-primary uk-border-pill" type="submit" >Post</button>
-      </div>
-
-</fieldset>
-  </form>
+			</fieldset>
+		</form>
+	</div>
   <div  id="success_message" style="display:none">
       <h3>Submitted the form successfully!</h3>
       <div id="success_message_div">

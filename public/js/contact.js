@@ -26,6 +26,7 @@ function contact_form_submit(el, e) {
           error_message.style = "display: block;";
           success_message.style = "display: none;";
         }
+        fadeOut(document.getElementById('contact_form_container'), 1, 0);
     } else {
         console.error("Contact Request - No Response");
         error_message.style = "display: block;";
@@ -73,4 +74,43 @@ function contact_form_submit(el, e) {
   XHR.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
   XHR.send(JSON.stringify(jsonObject));
+}
+
+var clickskip = false;
+
+function fadeOut(obj, from, to) {
+  var box = obj;
+  if (clickskip == true) {
+    box.style.opacity = to;
+    box.style = "display: none;";
+    return;
+  }
+  if (from >= to) {
+    box.style.opacity = to;
+    box.style = "display: none;";
+    return;
+  } else {
+    box.style.opacity = from;
+    setTimeout(function() {
+      fadeIn(obj, from - 0.02, to);
+    }, 37)
+  }
+}
+
+function fadeIn(obj, from, to) {
+  var box = obj;
+  if (clickskip == true) {
+    box.style.opacity = to;
+    //box.style = "display: block;";
+    return;
+  }
+  if (from >= to) {
+    box.style.opacity = to;
+    return;
+  } else {
+    box.style.opacity = from;
+    setTimeout(function() {
+      fadeIn(obj, from + 0.02, to);
+    }, 35)
+  }
 }

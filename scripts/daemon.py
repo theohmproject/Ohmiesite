@@ -127,14 +127,14 @@ class OhmRoot(object):
         # Clean Hosts
         for key in self.hosts:
             if self.getHostTime(key) <= -30:
-                hosts.push(key)
+                hosts.append(key)
         for key in hosts:
             self.hosts.pop(key)
             print( "> Removed Expired Host " + key )
         # Clean Agents
         for key in self.hostsAgents:
             if self.getAgentTime(key) <= -30:
-                agents.push(key)
+                agents.append(key)
         for key in agents:
             self.hostsAgents.pop(key)
             print( "> Removed Expired Agent " + key )

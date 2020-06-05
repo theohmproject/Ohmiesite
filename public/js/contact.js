@@ -93,7 +93,7 @@ function fadeOut(obj, from, to) {
   } else {
     box.style.opacity = from;
     setTimeout(function() {
-      fadeIn(obj, from - 0.02, to);
+      fadeOut(obj, from - 0.02, to);
     }, 37)
   }
 }

@@ -6,6 +6,9 @@ import os
 from datetime import datetime
 import smtplib
 from email.mime.text import MIMEText
+from email.header import header
+from email.utils import formataddr
+
 
 # Main ohm web object
 class OhmRoot(object):
@@ -48,13 +51,14 @@ class OhmRoot(object):
     #def shutdown(self):
     #    cherrypy.engine.exit()
 
-    def sendMail(self, name, email, msg):
+    def sendMail(self, name, email, message):
         xfrom = "system@ohmc.tips"
+        xfromName = "Ohmc.tips System"
         xto = "squid@sqdmc.net"
         # build the message
-        msg = MIMEText("")
-        msg['Subject'] = "OHM Contact from " + name
-        msg['From'] = xfrom
+        msg = MIMEText(message)
+        msg['Subject'] = "[OHMC.TIPS] New Message from '" + name + "'"
+        msg['From'] = formataddr((str(Header(xfromName, 'utf-8')), xfrom))
         msg['To'] = xto
         # Send mail..
         s = smtplib.SMTP('localhost')
@@ -66,7 +70,7 @@ class OhmRoot(object):
 # listen on alt port
 cherrypy.server.socket_port = 8771
 # listen on all interfaces
-cherrypy.server.socket_host = '0.0.0.0'
+cherrypy.server.socket_host = '127.0.0.1'
 
 # start the webserver!
 cherrypy.quickstart( OhmRoot() )

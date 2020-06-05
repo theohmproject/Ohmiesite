@@ -31,7 +31,7 @@ class OhmRoot(object):
         # TODO: send mail
         dateTimeObj = datetime.now() # current time
         file1 = open("contact.log", "a")  # append mode
-        file1.write(dateTimeObj + " > " + "NAME: " + name + ", EMAIL: " + email + ", MESSAGE: " + message +  "\n")
+        file1.write(str(dateTimeObj) + " > " + "NAME: " + name + ", EMAIL: " + email + ", MESSAGE: " + message +  "\n")
         file1.close()
         # send response
         message = { "response" : True, "status" : True, "message" : "message sent!" }

@@ -52,6 +52,7 @@ class OhmRoot(object):
         xfrom = "system@ohmc.tips"
         xto = "squid@sqdmc.net"
         # build the message
+        msg = MIMEText("")
         msg['Subject'] = "OHM Contact from " + name
         msg['From'] = xfrom
         msg['To'] = xto

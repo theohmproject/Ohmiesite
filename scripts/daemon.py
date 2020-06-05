@@ -5,6 +5,7 @@ import json
 import os
 import time
 import smtplib
+import hashlib
 from datetime import datetime
 from email.mime.text import MIMEText
 from email.header import Header
@@ -41,6 +42,9 @@ class OhmRoot(object):
             return 0
         return ts - th
 
+    def getHostHash(self, host, client):
+        return hashlib.sha224(host + "::" + client).hexdigest()
+
     @cherrypy.expose
     def index(self):
         message = { "response" : True, "status" : True, "message" : "not a web server." }
@@ -55,8 +59,9 @@ class OhmRoot(object):
         cl = cherrypy.request.headers['Content-Length']
         rawbody = cherrypy.request.body.read(int(cl))
         body = json.loads(rawbody)
-        remoteHost = cherrypy.request.headers['X_FORWARDED_FOR']
-        print( "Request from " + remoteHost )
+        remoteHost = cherrypy.request.headers['X-FORWARDED-FOR']
+        userAgent = cherrypy.request.headers['USER-AGENT']
+        hostHash = self.getHostHash(remoteHost, userAgent)
         # process form data..
         captcha = body['g-recaptcha-response']
         name = body['Name']
@@ -68,21 +73,21 @@ class OhmRoot(object):
         # build email body..
         msg = "SERVER TIME: " + str(dateTimeObj) + "\n" + "NAME: " + name + "\nEMAIL: " + email + "\n\n" + message + "";
         # Check if can send..
-        if self.allowHost(remoteHost):
+        if self.allowHost(hostHash):
             # send mail
             self.sendMail(name, email, msg)
             # track host..
-            self.addHost(remoteHost)
+            self.addHost(hostHash)
             # log to file..
             file1 = open("contact.log", "a")  # append mode
             file1.write(str(dateTimeObj) + " > " + "NAME: " + name + ", EMAIL: " + email + ", MESSAGE: " + message + "\n")
             file1.close()
             # send response
-            message = { "response" : True, "status" : True, "message" : "message sent!" }
+            message = { "response" : True, "status" : True, "message" : "message sent!", "retry" : 0 , "id" : hostHash }
             return json.dumps(message)
         else:
             # send response
-            message = { "response" : False, "status" : True, "message" : "you are doing this too often!", "retry" : getHostTime(remoteHost) }
+            message = { "response" : False, "status" : True, "message" : "you are doing this too often!", "retry" : getHostTime(hostHash), "id" : hostHash }
             return json.dumps(message)
 
     #@cherrypy.expose

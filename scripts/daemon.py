@@ -40,7 +40,7 @@ class OhmRoot(object):
         agentHash = self.getHostHash(remoteHost, userAgent)
         hostHash = self.getHostHash(remoteHost, 0)
         # Check if spam..
-        if !self.allowHost(hostHash):
+        if self.allowHost(hostHash) == False:
             message = { "response" : False, "status" : True, "message" : "you are doing this too often!!" }
             return json.dumps(message)
         else:

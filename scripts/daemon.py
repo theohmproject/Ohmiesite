@@ -22,7 +22,7 @@ class OhmRoot(object):
     hostsAgents = {}  # map of host sessions and last mail times.
     hosts = {}  # map of host sessions and last mail times.
 
-    localDir = str(Path(os.path.dirname(os.path.realpath(__file__))).resolve().parent)
+    localDir = str(Path(os.path.dirname(os.path.realpath(__file__))).resolve().parent) + "/public"
     print( "Root Directory: " + localDir )
     _cp_config = {'error_page.404': os.path.join(localDir, "error/404.html")}
 

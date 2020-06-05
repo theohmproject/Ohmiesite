@@ -18,7 +18,7 @@ function contact_form_submit(el, e) {
             error_message.style = "display: block;";
             success_message.style = "display: none;";
             error_message_div.innerHTML = json.message;
-          } else
+          } else {
             success_message.style = "display: block;";
             error_message.style = "display: none;";
           }

@@ -182,18 +182,41 @@
 						<!-- begin karmanode guide -->
 						<a class="uk-button uk-button-primary uk-border-pill" data-uk-icon="arrow-right" href="#karmanode" uk-toggle>LEARN MORE</a>
 						<div id="karmanode" class="uk-modal-full" uk-modal>
-   						 <div class="uk-modal-dialog">
+   						 <div class="uk-modal-dialog uk-inline">
        						 <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
-        						<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+       						 <ul class="uk-switcher karmanode-switcher">
         						<!-- @squid begin karmanode setup ajax content load content from htm/karmanode-install.htm -->
-            						<div class="uk-background-cover" style="background-image: url('images/photo.jpg');" uk-height-viewport></div>
+            						<li>
+            						<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+            						<div class="uk-background-cover" style="background-image: url('img/karmanode-knot.png');" uk-height-viewport></div>
            							 <div class="uk-padding-large">
                						 <h1>This should be Lazy loaded(ajax)</h1>
                						 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-           							 </div>
+           							 </div></div></li>
+            						<li>
+            						<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+									<div class="uk-background-cover" style="background-image: url('img/k.png');" uk-height-viewport></div>
+           							 <div class="uk-padding-large">
+               						 <h1>More stuff 01</h1>
+               						 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+           							 </div></div></li>
+           							 <li>
+            						<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+									<div class="uk-background-cover" style="background-image: url('img/k.png');" uk-height-viewport></div>
+           							 <div class="uk-padding-large">
+               						 <h1>More stuff 02</h1>
+               						 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+           							 </div></div></li>
            						<!-- @squid end karmanode setup ajax content -->
-       							 </div>
-   							 </div>
+       							</ul>
+       						 	<div class="uk-overlay uk-overlay-primary uk-position-bottom uk-dark uk-align-center">
+                             	<ul class="uk-subnav uk-subnav-pill" uk-switcher="connect: .karmanode-switcher">
+   							 	<li><a href="#">Active</a></li>
+    						 	<li><a href="#">Item</a></li>
+    						 	<li><a href="#">Item</a></li>
+                             	</ul>
+                             	</div>
+   							 	</div>
 						</div>
 						<!-- end karmanode guide -->
 					</div>

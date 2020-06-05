@@ -71,7 +71,7 @@ class OhmRoot(object):
             # send mail
             self.sendMail(name, email, msg)
             # track host..
-            addHost(remoteHost)
+            self.addHost(remoteHost)
             # log to file..
             file1 = open("contact.log", "a")  # append mode
             file1.write(str(dateTimeObj) + " > " + "NAME: " + name + ", EMAIL: " + email + ", MESSAGE: " + message + "\n")

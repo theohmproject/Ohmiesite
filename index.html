@@ -71,7 +71,8 @@
 				<a href="#content" data-uk-scroll="duration: 500" data-uk-icon="icon: arrow-down; ratio: 2"></a>
 			</div>
 		</div>
-		<!-- /TOP -->
+
+		<!-- TOP -->
 		<section id="content" class="uk-section uk-section-default">
 			<div class="uk-container">
 				<div class="uk-section uk-section-small uk-padding-remove-top">
@@ -166,6 +167,9 @@
 
 			</div>
 		</section>
+
+
+
 		<section class="uk-section uk-section-secondary uk-section-large">
 			<div class="uk-container">
 				<div class="uk-grid uk-child-width-1-2@l uk-flex-middle">
@@ -175,9 +179,9 @@
 						<p class="subtitle-text">
 							Staking Ohmcoin is not the only way to support the ohmcoin network, by setting up a karmanode you can earn rewards while helping process transactions.
 						</p>
-						<a class="uk-button uk-button-primary uk-border-pill" data-uk-icon="arrow-right" href="#modal-full" uk-toggle onclick="loadDoc()" >LEARN MORE</a>
-
-						<div id="modal-full" class="uk-modal-full" uk-modal>
+						<!-- begin karmanode guide -->
+						<a class="uk-button uk-button-primary uk-border-pill" data-uk-icon="arrow-right" href="#karmanode" uk-toggle>LEARN MORE</a>
+						<div id="karmanode" class="uk-modal-full" uk-modal>
    						 <div class="uk-modal-dialog">
        						 <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
         						<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
@@ -189,7 +193,7 @@
        							 </div>
    							 </div>
 						</div>
-
+						<!-- end karmanode guide -->
 					</div>
 					<div data-uk-scrollspy="cls: uk-animation-fade">
 						<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/marketing-2.svg" data-uk-img alt="Image">
@@ -197,6 +201,9 @@
 				</div>
 			</div>
 		</section>
+
+
+
 		<section class="uk-cover-container overlay-wrap">
 			<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset="https://picsum.photos/640/650/?image=770 640w,
 			https://picsum.photos/960/650/?image=770 960w,
@@ -343,7 +350,64 @@
 							<li>Team</li>
 							<li>Work</li>
 							<li>Culture</li>
-							<li>Contact Us</li>
+							<li><a href="#contact" uk-toggle="target: #contact">Contact Us</a></li>
+
+
+<!-- contact form -->
+<div id="contact" class="uk-modal-full" uk-modal>
+<div class="uk-modal-dialog">
+
+<button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+<div class="uk-background-cover" style="background-image: url('images/photo.jpg');" uk-height-viewport></div>
+<div class="uk-padding-large">
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<form  method="post" id="reused_form" >
+<fieldset class="uk-fieldset">
+  <legend class="uk-legend">Contact Us</legend>
+
+      <div class="uk-margin">
+      <input class="uk-input" id="name" type="text" name="Name" placeholder="Name" required maxlength="50">
+      </div>
+
+      <div class="uk-margin">
+      <input class="uk-input" id="email" type="email" name="Email" placeholder="Email" required maxlength="50">
+      </div>
+
+      <div class="uk-margin">
+      <textarea class="uk-textarea" id="message" name="Message" placeholder="Message" rows="10" maxlength="6000" required></textarea>
+      </div>
+
+
+
+                <div class="g-recaptcha" data-sitekey="Insert your recaptcha site key here"></div>
+
+      <div class="uk-margin">
+      <button class="uk-button uk-button-primary uk-border-pill" type="submit" >Post</button>
+      </div>
+
+</fieldset>
+  </form>
+  <div  id="success_message" style="display:none">
+      <h3>Submitted the form successfully!</h3>
+      <p>
+      We will get back to you soon.
+      </p>
+  </div>
+  <div id="error_message"
+        style="width:100%; height:100%; display:none; ">
+            <h3>Error</h3>
+            Sorry there was an error sending your form.
+
+  </div>
+</div>
+</div>
+</div>
+</div>
+<!-- contact form -->
+
 						</ul>
 					</div>
 					<div class="uk-width-1-6@m">

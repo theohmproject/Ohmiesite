@@ -14,6 +14,7 @@ from email.utils import formataddr
 # Main ohm web object
 class OhmRoot(object):
 
+    COOLDOWN_TIME = 120  # time in seconds between mail attempts..
     hosts = {}
 
     def addHost(self, host):
@@ -21,7 +22,7 @@ class OhmRoot(object):
         self.hosts[host] = ts
 
     def getHost(self, host):
-        if host in hosts:
+        if host in self.hosts:
             return self.hosts[host];
         return 0
 
@@ -30,7 +31,7 @@ class OhmRoot(object):
         th = self.getHost(host)
         if (th <= 0) :
             return True
-        return ts - th < 60
+        return ts - th < self.COOLDOWN_TIME
 
     def getHostTime(self, host):
         ts = time.time()

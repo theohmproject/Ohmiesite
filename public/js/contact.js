@@ -14,8 +14,14 @@ function contact_form_submit(el, e) {
     if (XHR.status === 200) {
         json = JSON.parse(XHR.responseText);
         if (json.status == true) {
-          success_message.style = "display: block;";
-          error_message.style = "display: none;";
+          if (json.response == false) {
+            error_message.style = "display: block;";
+            success_message.style = "display: none;";
+            error_message_div.innerHTML = json.message;
+          } else
+            success_message.style = "display: block;";
+            error_message.style = "display: none;";
+          }
         } else {
           error_message.style = "display: block;";
           success_message.style = "display: none;";

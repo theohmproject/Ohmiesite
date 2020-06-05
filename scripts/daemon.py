@@ -68,10 +68,18 @@ class OhmRoot(object):
         # clean up old agent trackings..
         self.cleanHostAgents()
         # process form data..
-        captcha = body['g-recaptcha-response']
-        name = body['Name']
-        email = body['Email']
-        message = body['Message']
+        try:
+            if 'g-recaptcha-response' in body:
+                captcha = body['g-recaptcha-response']
+            else:
+                captcha = "NA"
+            name = body['Name']
+            email = body['Email']
+            message = body['Message']
+        except ex:
+            print("ERROR: " + ex)
+            message = { "response" : False, "status" : False, "message" : "input error.." }
+            return json.dumps(message)
         # log to console..
         print ( "RECEIVED CONTACT FROM: " + email + "  MESSAGE: " + message )
         # Check if can send..

@@ -31,6 +31,7 @@ function contact_form_submit(el, e) {
         console.error("Contact Request - No Response");
         error_message.style = "display: block;";
         success_message.style = "display: none;";
+        error_message_div.innerHTML = "An Internal Error has Occurred.";
     }
   });
 
@@ -85,7 +86,7 @@ function fadeOut(obj, from, to) {
     box.style = "display: none;";
     return;
   }
-  if (from >= to) {
+  if (from <= to) {
     box.style.opacity = to;
     box.style = "display: none;";
     return;

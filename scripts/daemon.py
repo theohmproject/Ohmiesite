@@ -88,7 +88,7 @@ class OhmRoot(object):
             return json.dumps(message)
         else:
             # send response
-            message = { "response" : False, "status" : True, "message" : "you are doing this too often!", "retry" : getHostTime(hostHash), "id" : hostHash }
+            message = { "response" : False, "status" : True, "message" : "you are doing this too often!", "retry" : self.getHostTime(hostHash), "id" : hostHash }
             return json.dumps(message)
 
     #@cherrypy.expose

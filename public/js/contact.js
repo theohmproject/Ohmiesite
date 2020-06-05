@@ -60,7 +60,7 @@ function contact_form_submit(el, e) {
   });
 
   //XHR.open("POST", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/contact_submit");
-  XHR.open("POST", window.location.protocol + "//" + window.location.hostname + ":" + "8771" + "/api/contact_submit");
+  XHR.open("POST", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/api/contact_submit");
 
   XHR.timeout = 7300;
   XHR.setRequestHeader("Content-Type", "application/json;charset=UTF-8");

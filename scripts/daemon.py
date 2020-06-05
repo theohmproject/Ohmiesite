@@ -29,6 +29,7 @@ class OhmRoot(object):
     def allowHost(self, host):
         ts = time.time()
         th = self.getHost(host)
+        print( "ts=" + ts + " th=" + th )
         if (th <= 0) :
             return True
         return ts - th < self.COOLDOWN_TIME
@@ -54,7 +55,7 @@ class OhmRoot(object):
         cl = cherrypy.request.headers['Content-Length']
         rawbody = cherrypy.request.body.read(int(cl))
         body = json.loads(rawbody)
-        remoteHost = cherrypy.request.remote.ip
+        remoteHost = cherrypy.request.headers['HTTP_X_FORWARDED_FOR']
         print( "Request from " + remoteHost )
         # process form data..
         captcha = body['g-recaptcha-response']

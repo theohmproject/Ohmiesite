@@ -3,6 +3,7 @@
 import cherrypy
 import json
 import os
+from datetime import datetime
 
 # Main ohm web object
 class OhmRoot(object):
@@ -28,7 +29,10 @@ class OhmRoot(object):
         message = body['Message']
         print ( "RECEIVED FROM: " + email + "  MESSAGE: " + message )
         # TODO: send mail
-
+        dateTimeObj = datetime.now() # current time
+        file1 = open("contact.log", "a")  # append mode
+        file1.write(dateTimeObj + " > " + "NAME: " + name + ", EMAIL: " + email + ", MESSAGE: " + message +  "\n")
+        file1.close()
         # send response
         message = { "response" : True, "status" : True, "message" : "message sent!" }
         return json.dumps(message)
@@ -44,4 +48,4 @@ cherrypy.server.socket_port = 8771
 cherrypy.server.socket_host = '0.0.0.0'
 
 # start the webserver!
-cherrypy.quickstart( OhmRoot(), config = conf )
+cherrypy.quickstart( OhmRoot() )

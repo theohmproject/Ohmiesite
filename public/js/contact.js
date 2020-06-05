@@ -68,7 +68,6 @@ function contact_form_submit(el, e) {
     console.error(event);
   });
 
-  //XHR.open("POST", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/contact_submit");
   XHR.open("POST", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/api/contact_submit");
 
   XHR.timeout = 7300;
@@ -94,7 +93,7 @@ function fadeOut(obj, from, to) {
     box.style.opacity = from;
     setTimeout(function() {
       fadeOut(obj, from - 0.02, to);
-    }, 37)
+    }, 20)
   }
 }
 
@@ -102,7 +101,6 @@ function fadeIn(obj, from, to) {
   var box = obj;
   if (clickskip == true) {
     box.style.opacity = to;
-    //box.style = "display: block;";
     return;
   }
   if (from >= to) {
@@ -112,6 +110,6 @@ function fadeIn(obj, from, to) {
     box.style.opacity = from;
     setTimeout(function() {
       fadeIn(obj, from + 0.02, to);
-    }, 35)
+    }, 30)
   }
 }

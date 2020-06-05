@@ -15,36 +15,9 @@ from email.utils import formataddr
 # Main ohm web object
 class OhmRoot(object):
 
+    MAIL_RECEIVER = "squid@sqdmc.net"
     COOLDOWN_TIME = 120  # time in seconds between mail attempts..
-    hosts = {}
-
-    def addHost(self, host):
-        ts = time.time()
-        self.hosts[host] = ts
-
-    def getHost(self, host):
-        if host in self.hosts:
-            return self.hosts[host];
-        return 0
-
-    def allowHost(self, host):
-        ts = time.time()
-        th = self.getHost(host)
-        if (th <= 0) :
-            return True
-        return ts - th > self.COOLDOWN_TIME
-
-    def getHostTime(self, host):
-        ts = time.time()
-        th = self.getHost(host)
-        if (th <= 0) :
-            return 0
-        return ts - th
-
-    def getHostHash(self, host, client):
-        h = str(host);
-        c = str(client);
-        return hashlib.sha256(str(h + "::" + c).encode('utf-8')).hexdigest()
+    hosts = {}  # map of host sessions and last mail times.
 
     @cherrypy.expose
     def index(self):
@@ -91,14 +64,12 @@ class OhmRoot(object):
             message = { "response" : False, "status" : True, "message" : "you are doing this too often!", "retry" : self.getHostTime(hostHash), "id" : hostHash }
             return json.dumps(message)
 
-    #@cherrypy.expose
-    #def shutdown(self):
-    #    cherrypy.engine.exit()
-
+    ###########################################################################
+    # Send Email message
     def sendMail(self, name, email, message):
         xfrom = "system@ohmc.tips"
-        xfromName = "Ohmc.tips System"
-        xto = "squid@sqdmc.net"
+        xfromName = "ohmc.tips SYSTEM"
+        xto = self.MAIL_RECEIVER
         # build the message
         msg = MIMEText(message)
         msg['Subject'] = "[OHMC.TIPS] New Message from '" + name + "'"
@@ -110,6 +81,33 @@ class OhmRoot(object):
         s.quit()
         print( "Mail Sent!" )
 
+    def addHost(self, host):
+        ts = time.time()
+        self.hosts[host] = ts
+
+    def getHost(self, host):
+        if host in self.hosts:
+            return self.hosts[host];
+        return 0
+
+    def allowHost(self, host):
+        ts = time.time()
+        th = self.getHost(host)
+        if (th <= 0) :
+            return True
+        return ts - th > self.COOLDOWN_TIME
+
+    def getHostTime(self, host):
+        ts = time.time()
+        th = self.getHost(host)
+        if (th <= 0) :
+            return 0
+        return self.COOLDOWN_TIME - (ts - th)
+
+    def getHostHash(self, host, client):
+        h = str(host);
+        c = str(client);
+        return hashlib.sha256(str(h + "::" + c).encode('utf-8')).hexdigest()
 
 # listen on alt port
 cherrypy.server.socket_port = 8771

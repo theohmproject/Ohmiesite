@@ -54,12 +54,7 @@ class OhmRoot(object):
         print ( "RECEIVED FROM: " + email + "  MESSAGE: " + message )
         dateTimeObj = datetime.now() # current time
         # build email body..
-        msg = "\nUSER HOST: " + hostHash +
-            "\nUSER AGENT: " + agentHash +
-            "\nSERVER TIME: " + str(dateTimeObj) +
-            "\n\nFROM NAME: " + name +
-            "\nFROM EMAIL: " + email +
-            "\n\nMESSAGE:\n" + message + "";
+        msg = "\nUSER HOST: " + hostHash + "\nUSER AGENT: " + agentHash + "\nSERVER TIME: " + str(dateTimeObj) + "\n\nFROM NAME: " + name + "\nFROM EMAIL: " + email + "\n\nMESSAGE:\n" + message + "";
         # Check if can send..
         if self.allowAgent(agentHash):
             # send mail

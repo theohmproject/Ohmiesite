@@ -53,7 +53,7 @@ class OhmRoot(object):
         cl = cherrypy.request.headers['Content-Length']
         rawbody = cherrypy.request.body.read(int(cl))
         body = json.loads(rawbody)
-        remoteHost = cherrypy.request.headers['X_FORWARDED_FOR'];
+        remoteHost = cherrypy.request.remote.ip
         print( "Request from " + remoteHost )
         # process form data..
         captcha = body['g-recaptcha-response']

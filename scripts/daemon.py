@@ -22,7 +22,7 @@ class OhmRoot(object):
     hostsAgents = {}  # map of host sessions and last mail times.
     hosts = {}  # map of host sessions and last mail times.
 
-    localDir = Path(os.path.dirname(os.path.realpath(__file__))).resolve().parent
+    localDir = str(Path(os.path.dirname(os.path.realpath(__file__))).resolve().parent) + "/public"
     print( "Root Directory: " + localDir )
     _cp_config = {'error_page.404': os.path.join(localDir, "error/404.html")}
 
@@ -68,10 +68,18 @@ class OhmRoot(object):
         # clean up old agent trackings..
         self.cleanHostAgents()
         # process form data..
-        captcha = body['g-recaptcha-response']
-        name = body['Name']
-        email = body['Email']
-        message = body['Message']
+        try:
+            if 'g-recaptcha-response' in body:
+                captcha = body['g-recaptcha-response']
+            else:
+                captcha = "NA"
+            name = body['Name']
+            email = body['Email']
+            message = body['Message']
+        except ex:
+            print("ERROR: " + ex)
+            message = { "response" : False, "status" : False, "message" : "input error.." }
+            return json.dumps(message)
         # log to console..
         print ( "RECEIVED CONTACT FROM: " + email + "  MESSAGE: " + message )
         # Check if can send..
@@ -119,14 +127,14 @@ class OhmRoot(object):
         # Clean Hosts
         for key in self.hosts:
             if self.getHostTime(key) <= -30:
-                hosts.push(key)
+                hosts.append(key)
         for key in hosts:
             self.hosts.pop(key)
             print( "> Removed Expired Host " + key )
         # Clean Agents
         for key in self.hostsAgents:
             if self.getAgentTime(key) <= -30:
-                agents.push(key)
+                agents.append(key)
         for key in agents:
             self.hostsAgents.pop(key)
             print( "> Removed Expired Agent " + key )

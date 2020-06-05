@@ -15,12 +15,15 @@ function contact_form_submit(el, e) {
         json = JSON.parse(XHR.responseText);
         if (json.status == true) {
           success_message.style = "display: block;";
+          error_message.style = "display: none;";
         } else {
           error_message.style = "display: block;";
+          success_message.style = "display: none;";
         }
     } else {
         console.error("Contact Request - No Response");
         error_message.style = "display: block;";
+        success_message.style = "display: none;";
     }
   });
 
@@ -52,8 +55,6 @@ function contact_form_submit(el, e) {
     }
     jsonObject[entries.current[0]] = entries.current[1];
   }
-
-  console.log(jsonObject);
 
   XHR.addEventListener("error", function (event) {
     console.error(event);

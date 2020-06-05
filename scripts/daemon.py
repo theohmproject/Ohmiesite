@@ -4,6 +4,8 @@ import cherrypy
 import json
 import os
 from datetime import datetime
+import smtplib
+from email.mime.text import MIMEText
 
 # Main ohm web object
 class OhmRoot(object):
@@ -27,19 +29,37 @@ class OhmRoot(object):
         name = body['Name']
         email = body['Email']
         message = body['Message']
+        # log to console..
         print ( "RECEIVED FROM: " + email + "  MESSAGE: " + message )
-        # TODO: send mail
         dateTimeObj = datetime.now() # current time
+        # build email body..
+        msg = str(dateTimeObj) + " > " + "NAME: " + name + "  EMAIL: " + email + " <br/>\n" + message + "";
+        # send mail
+        self.sendMail(name, email, msg)
+        # log to file..
         file1 = open("contact.log", "a")  # append mode
-        file1.write(str(dateTimeObj) + " > " + "NAME: " + name + ", EMAIL: " + email + ", MESSAGE: " + message +  "\n")
+        file1.write(str(dateTimeObj) + " > " + "NAME: " + name + ", EMAIL: " + email + ", MESSAGE: " + message + "\n")
         file1.close()
         # send response
         message = { "response" : True, "status" : True, "message" : "message sent!" }
         return json.dumps(message)
 
-    @cherrypy.expose
-    def shutdown(self):
-        cherrypy.engine.exit()
+    #@cherrypy.expose
+    #def shutdown(self):
+    #    cherrypy.engine.exit()
+
+    def sendMail(self, name, email, msg):
+        xfrom = "system@ohmc.tips"
+        xto = "squid@sqdmc.net"
+        # build the message
+        msg['Subject'] = "OHM Contact from " + name
+        msg['From'] = xfrom
+        msg['To'] = xto
+        # Send mail..
+        s = smtplib.SMTP('localhost')
+        s.sendmail(xfrom, xto, msg.as_string())
+        s.quit()
+        print( "Mail Sent!" )
 
 
 # listen on alt port

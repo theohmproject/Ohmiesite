@@ -30,7 +30,7 @@ class OhmRoot(object):
     def allowHost(self, host):
         ts = time.time()
         th = self.getHost(host)
-        print( "ts=" + ts + " th=" + th )
+        print( "ts=" + str(ts) + " th=" + str(th) )
         if (th <= 0) :
             return True
         return ts - th < self.COOLDOWN_TIME

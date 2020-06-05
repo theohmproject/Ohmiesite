@@ -17,6 +17,8 @@ class OhmRoot(object):
 
     MAIL_RECEIVER = "squid@sqdmc.net"
     COOLDOWN_TIME = 120  # time in seconds between mail attempts..
+    COOLDOWN_TIME_IP = 3  # time in seconds between mail attempts..
+    hostsAgents = {}  # map of host sessions and last mail times.
     hosts = {}  # map of host sessions and last mail times.
 
     @cherrypy.expose
@@ -35,7 +37,14 @@ class OhmRoot(object):
         body = json.loads(rawbody)
         remoteHost = cherrypy.request.headers['X-FORWARDED-FOR']
         userAgent = cherrypy.request.headers['USER-AGENT']
-        hostHash = self.getHostHash(remoteHost, userAgent)
+        agentHash = self.getHostHash(remoteHost, userAgent)
+        hostHash = self.getHostHash(remoteHost, 0)
+        # Check if spam..
+        if !self.allowHost(hostHash):
+            message = { "response" : False, "status" : True, "message" : "you are doing this too often!!" }
+            return json.dumps(message)
+        else:
+            self.addHost(hostHash)
         # process form data..
         captcha = body['g-recaptcha-response']
         name = body['Name']
@@ -45,23 +54,28 @@ class OhmRoot(object):
         print ( "RECEIVED FROM: " + email + "  MESSAGE: " + message )
         dateTimeObj = datetime.now() # current time
         # build email body..
-        msg = "SERVER TIME: " + str(dateTimeObj) + "\n" + "NAME: " + name + "\nEMAIL: " + email + "\n\n" + message + "";
+        msg = "\nUSER HOST: " + hostHash +
+            "\nUSER AGENT: " + agentHash +
+            "\nSERVER TIME: " + str(dateTimeObj) +
+            "\n\nFROM NAME: " + name +
+            "\nFROM EMAIL: " + email +
+            "\n\nMESSAGE:\n" + message + "";
         # Check if can send..
-        if self.allowHost(hostHash):
+        if self.allowAgent(agentHash):
             # send mail
             self.sendMail(name, email, msg)
             # track host..
-            self.addHost(hostHash)
+            self.addAgent(agentHash)
             # log to file..
             file1 = open("contact.log", "a")  # append mode
             file1.write(str(dateTimeObj) + " > " + "NAME: " + name + ", EMAIL: " + email + ", MESSAGE: " + message + "\n")
             file1.close()
             # send response
-            message = { "response" : True, "status" : True, "message" : "message sent!", "retry" : 0 , "id" : hostHash }
+            message = { "response" : True, "status" : True, "message" : "message sent!", "retry" : 0 , "id" : agentHash }
             return json.dumps(message)
         else:
             # send response
-            message = { "response" : False, "status" : True, "message" : "you are doing this too often!", "retry" : self.getHostTime(hostHash), "id" : hostHash }
+            message = { "response" : False, "status" : True, "message" : "you are doing this too often!", "retry" : self.getAgentTime(agentHash), "id" : agentHash }
             return json.dumps(message)
 
     ###########################################################################
@@ -81,6 +95,7 @@ class OhmRoot(object):
         s.quit()
         print( "Mail Sent!" )
 
+    # Hosts
     def addHost(self, host):
         ts = time.time()
         self.hosts[host] = ts
@@ -95,15 +110,40 @@ class OhmRoot(object):
         th = self.getHost(host)
         if (th <= 0) :
             return True
-        return ts - th > self.COOLDOWN_TIME
+        return ts - th > self.COOLDOWN_TIME_IP
 
     def getHostTime(self, host):
         ts = time.time()
         th = self.getHost(host)
         if (th <= 0) :
             return 0
+        return self.COOLDOWN_TIME_IP - (ts - th)
+
+    # User Agents
+    def addAgent(self, host):
+        ts = time.time()
+        self.hostsAgents[host] = ts
+
+    def getAgent(self, host):
+        if host in self.hostsAgents:
+            return self.hostsAgents[host];
+        return 0
+
+    def allowAgent(self, host):
+        ts = time.time()
+        th = self.getAgent(host)
+        if (th <= 0) :
+            return True
+        return ts - th > self.COOLDOWN_TIME
+
+    def getAgentTime(self, host):
+        ts = time.time()
+        th = self.getAgent(host)
+        if (th <= 0) :
+            return 0
         return self.COOLDOWN_TIME - (ts - th)
 
+    # Gets hash of host or agent
     def getHostHash(self, host, client):
         h = str(host);
         c = str(client);

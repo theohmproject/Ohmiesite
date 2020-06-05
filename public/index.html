@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Ohmcoin</title>
-		<link rel="icon" href="img/favicon.png">
+		<link rel="icon" href="img/favicon.ico">
 		<!-- CSS FILES -->
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css">
 		<link rel="stylesheet" type="text/css" href="css/ohmcoin.css">
@@ -26,7 +26,7 @@
 					<nav class="uk-navbar uk-navbar-container uk-navbar-transparent" data-uk-navbar>
 						<div class="uk-navbar-left">
 							<div class="uk-navbar-item uk-padding-remove-horizontal">
-								<a class="uk-logo" title="Logo" href=""><img src="https://www.ohmcoin.org/images/logoed429ba9.png" alt="Logo"> hmcoin</a>
+								<a class="uk-logo" title="Logo" href=""><img src="img/ohmcoin-logo.png" alt="Logo"> hmcoin</a>
 							</div>
 						</div>
 						<div class="uk-navbar-right">
@@ -188,32 +188,32 @@
         						<!-- @squid begin karmanode setup ajax content load content from htm/karmanode-install.htm -->
             						<li>
             						<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
-            						<div class="uk-background-cover" style="background-image: url('img/karmanode-knot.png');" uk-height-viewport></div>
-           							 <div class="uk-padding-large">
+            						<div class="uk-background-cover" style="background-image: url('img/karmanode-knot.png');" data-uk-scrollspy="uk-animation-slide-left-medium" uk-height-viewport></div>
+           							 <div class="uk-padding-large" data-uk-scrollspy-class="uk-animation-slide-right-medium">
                						 <h1>This should be Lazy loaded(ajax)</h1>
                						 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
            							 </div></div></li>
             						<li>
             						<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
-									<div class="uk-background-cover" style="background-image: url('img/k.png');" uk-height-viewport></div>
-           							 <div class="uk-padding-large">
+									<div class="uk-background-cover" style="background-image: url('img/k.png');" data-uk-scrollspy="uk-animation-slide-left-medium"  uk-height-viewport></div>
+           							 <div class="uk-padding-large" data-uk-scrollspy-class="uk-animation-slide-right-medium">
                						 <h1>More stuff 01</h1>
                						 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
            							 </div></div></li>
            							 <li>
-            						<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+            						<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" data-uk-scrollspy="target: > div; cls: uk-animation-slide-left-medium" uk-grid>
 									<div class="uk-background-cover" style="background-image: url('img/k.png');" uk-height-viewport></div>
-           							 <div class="uk-padding-large">
+           							 <div class="uk-padding-large" data-uk-scrollspy-class="uk-animation-slide-right-medium">
                						 <h1>More stuff 02</h1>
                						 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
            							 </div></div></li>
            						<!-- @squid end karmanode setup ajax content -->
        							</ul>
-       						 	<div class="uk-overlay uk-overlay-primary uk-position-bottom uk-dark uk-align-center">
-                             	<ul class="uk-subnav uk-subnav-pill" uk-switcher="connect: .karmanode-switcher">
-   							 	<li><a href="#">Active</a></li>
-    						 	<li><a href="#">Item</a></li>
-    						 	<li><a href="#">Item</a></li>
+       						 	<div class="uk-overlay uk-overlay-primary uk-position-bottom uk-align-top">
+                             	<ul class="uk-subnav uk-subnav-pill uk-flex uk-flex-center" uk-switcher="connect: .karmanode-switcher">
+   							 	<li><a class="uk-border-pill" href="#">Active</a></li>
+    						 	<li><a class="uk-border-pill" href="#">Item</a></li>
+    						 	<li><a class="uk-border-pill" href="#">Item</a></li>
                              	</ul>
                              	</div>
    							 	</div>
@@ -489,7 +489,5 @@
 		<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
 		<script src="js/contact.js"></script>
-		<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script> -->
-
 	</body>
 </html>

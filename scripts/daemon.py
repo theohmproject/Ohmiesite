@@ -21,6 +21,8 @@ class OhmRoot(object):
     hostsAgents = {}  # map of host sessions and last mail times.
     hosts = {}  # map of host sessions and last mail times.
 
+    _cp_config = {'error_page.404': os.path.join(localDir, "error/404.html")}
+
     @cherrypy.expose
     def index(self):
         message = { "response" : True, "status" : True, "message" : "Not a web server. This method is restricted." }

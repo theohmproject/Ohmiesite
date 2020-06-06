@@ -313,17 +313,15 @@ class OhmRoot(object):
         return 0
 
     def allowHeightCache(self):
-        host = "local"
         ts = time.time()
-        th = self.getHeightCache(host)
+        th = self.getHeightCache()
         if (th <= 0) :
             return True
         return ts - th > 30
 
     def getHeightCacheTime(self):
-        host = "local"
         ts = time.time()
-        th = self.getHeightCache(host)
+        th = self.getHeightCache()
         if (th <= 0) :
             return 0
         return 30 - (ts - th)
@@ -348,17 +346,15 @@ class OhmRoot(object):
         return 0
 
     def allowBlockCache(self):
-        host = "local"
         ts = time.time()
-        th = self.getBlockCache(host)
+        th = self.getBlockCache()
         if (th <= 0) :
             return True
         return ts - th > 30
 
     def getBlockCacheTime(self):
-        host = "local"
         ts = time.time()
-        th = self.getBlockCache(host)
+        th = self.getBlockCache()
         if (th <= 0) :
             return 0
         return 30 - (ts - th)
@@ -383,17 +379,15 @@ class OhmRoot(object):
         return 0
 
     def allowConnsCache(self):
-        host = "local"
         ts = time.time()
-        th = self.getConnsCache(host)
+        th = self.getConnsCache()
         if (th <= 0) :
             return True
         return ts - th > 50
 
     def getConnsCacheTime(self):
-        host = "local"
         ts = time.time()
-        th = self.getConnsCache(host)
+        th = self.getConnsCache()
         if (th <= 0) :
             return 0
         return 50 - (ts - th)

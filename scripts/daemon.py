@@ -54,7 +54,7 @@ class OhmRoot(object):
             # get agent hashes..
             agentHash = self.getHostHash(remoteHost, userAgent)
             hostHash = self.getHostHash(remoteHost, 0)
-        except ex:
+        except as ex:
             print("ERROR: " + ex)
             message = { "response" : False, "status" : False, "message" : "input error.." }
             return json.dumps(message)
@@ -78,7 +78,7 @@ class OhmRoot(object):
             name = body['Name']
             email = body['Email']
             message = body['Message']
-        except ex:
+        except as ex:
             print("ERROR: " + ex)
             message = { "response" : False, "status" : False, "message" : "input error.." }
             return json.dumps(message)
@@ -220,7 +220,7 @@ class OhmRoot(object):
         conf = self.loadConf()
         try:
             height = self.getBlockHeight(conf[2], conf[0], conf[1])
-        except ex:
+        except as ex:
             print("Failed to fetch Height!")
             print(ex)
             return "error"

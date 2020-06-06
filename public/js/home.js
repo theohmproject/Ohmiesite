@@ -3,7 +3,7 @@ var contentsLoaded = false;
 
 window.addEventListener('scroll', function() {
   var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  if (c > 900 && contentsLoaded == false) {
+  if (scrollTop > 900 && contentsLoaded == false) {
     init_contents();
     contentsLoaded = true;
   }

@@ -198,11 +198,12 @@ class OhmRoot(object):
     def getBlockHeight(self, port, user, pazz):
         method = "getblockcount"
         params = []
-        url = 'http://127.0.0.1:' + port
-        payload = {" jsonrpc": "1.0", "id":"pycurl", "method": method, "params": params }
+        url = '127.0.0.1:' + port
+        payload = {" jsonrpc": "1.0", "id": "pycurl", "method": method, "params": params }
         headers = { 'content-type': 'application/json', 'Accept-Charset': 'UTF-8' }
         r = requests.post(url, data=payload, headers=headers)
         respj = r.json()
+        return respj
 
     def loadConf(self):
         data = json.loads("{}")
@@ -219,8 +220,9 @@ class OhmRoot(object):
         conf = self.loadConf()
         try:
             height = self.getBlockHeight(conf[2], conf[0], conf[1])
-        except:
+        except ex:
             print("Failed to fetch Height!")
+            print(ex)
             return "error"
         print(str(height))
         return height

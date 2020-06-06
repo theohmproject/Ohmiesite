@@ -350,7 +350,7 @@ class OhmRoot(object):
     def allowBlockCache(self):
         host = "local"
         ts = time.time()
-        th = self.getAggetBlockCacheent(host)
+        th = self.getBlockCache(host)
         if (th <= 0) :
             return True
         return ts - th > 30

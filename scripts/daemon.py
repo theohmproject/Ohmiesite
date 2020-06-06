@@ -226,7 +226,6 @@ class OhmRoot(object):
             print("Failed to fetch Height!")
             print(ex)
             return "error"
-        print(str(height['result']))
         return json.dumps({"height": height })
 
     @cherrypy.expose
@@ -245,7 +244,6 @@ class OhmRoot(object):
             print("Failed to fetch Block!")
             print(ex)
             return "error"
-        print(str(height['result']))
         return json.dumps({ "blockhash": blockh, "height": height })
 
 # listen on alt port

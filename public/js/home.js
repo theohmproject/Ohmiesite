@@ -1,4 +1,13 @@
 
+window.addEventListener('scroll', function() {
+  var a = element.scrollTop;
+  var b = element.scrollHeight - element.clientHeight;
+  var c = a / b;
+  if (c > 0.2) {
+    init_contents();
+  }
+});
+
 // Load html page into div element..
 function load_page(element, path, tag) {
     var html = '<object type="text/html" data="' + path + '" ></object>';
@@ -15,6 +24,7 @@ function appendList(list, item) {
 }
 
 function init_contents() {
+  console.log("Load More Page..");
   ajax_load_page("karmanode_load", "/htm/karmanode-install.htm", "Install");
   //load_page("karmanode_load", "htm/karmanode-install.htm", "Install");
 }

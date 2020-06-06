@@ -9,7 +9,8 @@
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css">
 		<link rel="stylesheet" type="text/css" href="css/ohmcoin.css">
 	</head>
-	<body>
+
+	<body onload="init_contents();">
 
 <!-- begin fork me on github -->
 <div class="uk-visible@s" uk-sticky>
@@ -184,7 +185,7 @@
 						<div id="karmanode" class="uk-modal-full" uk-modal>
    						 <div class="uk-modal-dialog uk-inline">
        						 <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
-       						 <ul class="uk-switcher karmanode-switcher">
+       						 <ul id="karmanode_load" class="uk-switcher karmanode-switcher">
         						<!-- @squid begin karmanode setup ajax content load content from htm/karmanode-install.htm -->
             						<li>
             						<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
@@ -208,9 +209,10 @@
                						 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
            							 </div></div></li>
            						<!-- @squid end karmanode setup ajax content -->
+
        							</ul>
        						 	<div class="uk-overlay uk-overlay-primary uk-position-bottom uk-align-top">
-                             	<ul class="uk-subnav uk-subnav-pill uk-flex uk-flex-center" uk-switcher="connect: .karmanode-switcher">
+                             	<ul id="karmanode_load_nav" class="uk-subnav uk-subnav-pill uk-flex uk-flex-center" uk-switcher="connect: .karmanode-switcher">
    							 	<li><a class="uk-border-pill" href="#">Active</a></li>
     						 	<li><a class="uk-border-pill" href="#">Item</a></li>
     						 	<li><a class="uk-border-pill" href="#">Item</a></li>
@@ -489,5 +491,6 @@
 		<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
 		<script src="js/contact.js"></script>
+		<script src="js/home.js"></script>
 	</body>
 </html>

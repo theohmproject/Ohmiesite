@@ -198,7 +198,7 @@ class OhmRoot(object):
     def getBlockHeight(self, port, user, pazz):
         method = "getblockcount"
         params = []
-        url = '127.0.0.1:' + port
+        url = 'http://127.0.0.1:' + port
         payload = {" jsonrpc": "1.0", "id": "pycurl", "method": method, "params": params }
         headers = { 'content-type': 'application/json', 'Accept-Charset': 'UTF-8' }
         r = requests.post(url, data=payload, headers=headers)

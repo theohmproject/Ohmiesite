@@ -20,7 +20,7 @@ function init_contents() {
   //load_page("karmanode_load", "htm/karmanode-install.htm", "Install");
 }
 
-function ajax_load_page(element, path) {
+function ajax_load_page(element, path, tag) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', path, true);
   xhr.onreadystatechange = function() {

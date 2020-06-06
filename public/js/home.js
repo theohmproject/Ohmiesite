@@ -12,11 +12,10 @@ function appendList(list, item) {
   var li = document.createElement("li");
   li.innerHTML = item;
   ul.appendChild(li);
-  console.log("List Appended");
 }
 
 function init_contents() {
-  ajax_load_page("karmanode_load", "htm/karmanode-install.htm", "Install");
+  ajax_load_page("karmanode_load", "/htm/karmanode-install.htm", "Install");
   //load_page("karmanode_load", "htm/karmanode-install.htm", "Install");
 }
 

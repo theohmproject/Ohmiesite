@@ -296,7 +296,7 @@ class OhmRoot(object):
 
     # RPC Height Caching
     def addHeightCache(self, value, updatetime = True):
-        host = "local
+        host = "local"
         if updatetime == True:
             ts = time.time()
             self.cacheHeight[host] = ts

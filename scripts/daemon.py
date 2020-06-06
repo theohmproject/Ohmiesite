@@ -227,7 +227,7 @@ class OhmRoot(object):
             print(ex)
             return "error"
         print(str(height['result']))
-        return json.dumps({"height": height }})
+        return json.dumps({"height": height })
 
     @cherrypy.expose
     def getbestblock(self):

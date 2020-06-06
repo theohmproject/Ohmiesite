@@ -201,7 +201,8 @@ class OhmRoot(object):
         url = 'http://127.0.0.1:' + port
         payload = {" jsonrpc": "1.0", "id": "pycurl", "method": method, "params": params }
         headers = { 'content-type': 'application/json', 'Accept-Charset': 'UTF-8' }
-        r = requests.post(url, data=payload, headers=headers)
+        r = requests.post(url, data=payload, headers=headers, auth=(user, pazz))
+        print(str(r))
         respj = r.json()
         return respj
 

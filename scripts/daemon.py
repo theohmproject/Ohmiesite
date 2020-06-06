@@ -124,7 +124,7 @@ class OhmRoot(object):
                 params = []
                 hh = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
                 height = hh['result']
-                self.addHeightCache()
+                self.addHeightCache(height)
             else:
                 height = self.getHeightCacheVal()
         except Exception as ex:
@@ -141,7 +141,7 @@ class OhmRoot(object):
                 params = []
                 cc = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
                 conns = cc['result']
-                self.addConnsCache()
+                self.addConnsCache(conns)
             else:
                 conns = self.getConnsCacheVal()
         except Exception as ex:
@@ -158,11 +158,12 @@ class OhmRoot(object):
                 params = []
                 hh = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
                 height = hh['result']
+                self.addHeightCache(height, False)
                 method = "getblockhash"
                 params = [ height ]
                 bb = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
                 blockh = bb['result']
-                self.addBlockCache()
+                self.addBlockCache(blockh)
             else:
                 height = self.getHeightCacheVal()
                 blockh = self.getBlockCacheVal()
@@ -294,10 +295,11 @@ class OhmRoot(object):
         return respj
 
     # RPC Height Caching
-    def addHeightCache(self, value):
-        host = "local"
-        ts = time.time()
-        self.cacheHeight[host] = ts
+    def addHeightCache(self, value, updatetime = True):
+        host = "local
+        if updatetime == True:
+            ts = time.time()
+            self.cacheHeight[host] = ts
         self.cacheHeight[host + '_val'] = value
 
     def getHeightCache(self):
@@ -327,11 +329,11 @@ class OhmRoot(object):
         return 30 - (ts - th)
 
     # RPC Blocks Caching
-    def addBlockCache(self):
+    def addBlockCache(self, value):
         host = "local"
         ts = time.time()
         self.cacheBlocks[host] = ts
-        self.cacheBlocks[host + '_val'] = ts
+        self.cacheBlocks[host + '_val'] = value
 
     def getBlockCache(self):
         host = "local"
@@ -360,11 +362,11 @@ class OhmRoot(object):
         return 30 - (ts - th)
 
     # RPC Connections Caching
-    def addConnsCache(self):
+    def addConnsCache(self, value):
         host = "local"
         ts = time.time()
         self.cacheConnct[host] = ts
-        self.cacheConnct[host + '_val'] = ts
+        self.cacheConnct[host + '_val'] = value
 
     def getConnsCache(self):
         host = "local"

@@ -26,7 +26,7 @@ function ajax_load_page(element, path, tag) {
       if (this.readyState !== 4) return;
       if (this.status !== 200) return;
       //document.getElementById(element).innerHTML = this.responseText;
-      appendList(element, this.responseTex);
+      appendList(element, this.responseText);
       var nav = '<a href="#">' + tag + '</a>';
       appendList(element+'_nav', nav);
   };

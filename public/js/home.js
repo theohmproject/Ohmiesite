@@ -2,11 +2,8 @@
 var contentsLoaded = false;
 
 window.addEventListener('scroll', function() {
-  element = document.getElementById("content");
-  var a = element.scrollTop;
-  var b = element.scrollHeight - element.clientHeight;
-  var c = a / b;
-  if (c > 0.2 && contentsLoaded == false) {
+  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  if (c > 900 && contentsLoaded == false) {
     init_contents();
     contentsLoaded = true;
   }

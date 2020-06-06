@@ -236,7 +236,7 @@ class OhmRoot(object):
             params = []
             hh = self.doRpcRequest(conf[2], conf[0], conf[1], method, params)
             height = hh['result']
-            method = "getblock"
+            method = "getblockhash"
             params = [ height ]
             bb = self.doRpcRequest(conf[2], conf[0], conf[1], method, params)
             blockh = bb['result']

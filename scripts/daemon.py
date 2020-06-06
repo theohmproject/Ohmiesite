@@ -225,7 +225,7 @@ class OhmRoot(object):
             print("Failed to fetch Height!")
             print(ex)
             return "error"
-        print(str(height['result]']))
+        print(str(height['result']))
         return json.dumps(height)
 
 # listen on alt port

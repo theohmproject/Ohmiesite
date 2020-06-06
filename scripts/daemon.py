@@ -17,9 +17,8 @@ from pathlib import Path
 # Main ohm web object
 class OhmRoot(object):
 
-    MAIL_RECEIVER = "squid@sqdmc.net"
-    COOLDOWN_TIME = 120  # time in seconds between mail attempts..
-    COOLDOWN_TIME_IP = 3  # time in seconds between mail attempts..
+    COOLDOWN_TIME_IP = 3  # time in seconds between mail attempts per ip..
+    COOLDOWN_TIME = 120  # time in seconds between mail attempts per session..
     hostsAgents = {}  # map of host sessions and last mail times.
     hosts = {}  # map of host sessions and last mail times.
 
@@ -27,6 +26,13 @@ class OhmRoot(object):
     pubDir = localDir + "/public"
     print( "Root Directory: " + localDir )
     _cp_config = {'error_page.404': os.path.join(pubDir, "error/404.html")}
+
+    ###########################################################################
+    def __init__(self):
+        version = "0.1"
+        conf = self.loadConf()
+        COOLDOWN_TIME_IP = conf['cooldownhost']
+        COOLDOWN_TIME = conf['cooldownagent']
 
     @cherrypy.expose
     def index(self):
@@ -108,9 +114,9 @@ class OhmRoot(object):
     ###########################################################################
     # Send Email message
     def sendMail(self, name, email, message):
-        xfrom = "system@ohmc.tips"
-        xfromName = "ohmc.tips SYSTEM"
-        xto = self.MAIL_RECEIVER
+        xfrom = self.conf["systemfrom"]
+        xfromName = self.conf["sysnamefrom"]
+        xto = self.conf["fowardto"]
         # build the message
         msg = MIMEText(message)
         msg['Subject'] = "[OHMC.TIPS] New Message from '" + name + "'"
@@ -195,32 +201,45 @@ class OhmRoot(object):
         c = str(client);
         return hashlib.sha256(str(h + "::" + c).encode('utf-8')).hexdigest()
 
+    # Loads the config from file into dict
+    def loadConf(self):
+        try:
+            data = json.loads("{}")
+            with open(self.localDir + '/.env/conf.json') as f:
+                data = json.load(f)
+            self.version = data['CONFIG'][0]['Version']
+            username = data['CONFIG'][1]['RPC'][0]['Username']
+            password = data['CONFIG'][1]['RPC'][0]['Password']
+            port = data['CONFIG'][1]['RPC'][0]['Port']
+            sysfrm = data['CONFIG'][2]['EMAIL'][0]['SystemFrom']
+            sysnmefrm = data['CONFIG'][2]['EMAIL'][0]['SystemFromName']
+            fwdto = data['CONFIG'][2]['EMAIL'][0]['FowardTo']
+            chost = data['CONFIG'][3]['XDOS'][0]['CooldownTimeHost']
+            cagnt = data['CONFIG'][3]['XDOS'][0]['CooldownTimeAgent']
+            item = { "username" : username, "password" : password, "port" : port, "fowardto" : fwdto, "systemfrom" : sysfrm, "sysnamefrom" : sysnmefrm, "cooldownhost" : chost, "cooldownagent" : cagnt}
+            print("Config Loaded! Version " + self.version)
+            return item
+        except Exception as ex:
+            print("Config Loading Error!  " + ex)
+            return {}
+
+    # Do RPC request
     def doRpcRequest(self, port, user, pazz, method, params):
         url = 'http://127.0.0.1:' + port
         payload = json.dumps({" jsonrpc": "2.0", "id": "pycurl", "method": method, "params": params })
         headers = { 'content-type': 'application/json' }
         r = requests.post(url, data=payload, headers=headers, auth=(user, pazz))
-        #print(str(r))
         respj = r.json()
         return respj
 
-    def loadConf(self):
-        data = json.loads("{}")
-        with open(self.localDir + '/.env/conf.json') as f:
-            data = json.load(f)
-        username = str(data['CONFIG'][1]['RPC'][0]['Username'])
-        password = str(data['CONFIG'][1]['RPC'][0]['Password'])
-        port = str(data['CONFIG'][1]['RPC'][0]['Port'])
-        item = [ username, password, port ]
-        return item
-
+    ###########################################################################
+    # API Functions..
     @cherrypy.expose
     def getblockheight(self):
-        conf = self.loadConf()
         try:
             method = "getblockcount"
             params = []
-            hh = self.doRpcRequest(conf[2], conf[0], conf[1], method, params)
+            hh = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
             height = hh['result']
         except Exception as ex:
             print("Failed to fetch Height!")
@@ -229,16 +248,28 @@ class OhmRoot(object):
         return json.dumps({"height": height })
 
     @cherrypy.expose
+    def getconnectioncount(self):
+        try:
+            method = "getconnectioncount"
+            params = []
+            cc = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
+            conns = cc['result']
+        except Exception as ex:
+            print("Failed to fetch Connection count!")
+            print(ex)
+            return "error"
+        return json.dumps({"connections": conns })
+
+    @cherrypy.expose
     def getbestblock(self):
-        conf = self.loadConf()
         try:
             method = "getblockcount"
             params = []
-            hh = self.doRpcRequest(conf[2], conf[0], conf[1], method, params)
+            hh = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
             height = hh['result']
             method = "getblockhash"
             params = [ height ]
-            bb = self.doRpcRequest(conf[2], conf[0], conf[1], method, params)
+            bb = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
             blockh = bb['result']
         except Exception as ex:
             print("Failed to fetch Block!")

@@ -1,21 +1,11 @@
 
 var contentsLoaded = false;
-
 window.addEventListener('scroll', function() {
   var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  if (scrollTop > 900 && contentsLoaded == false) {
+  if (scrollTop > 500 && contentsLoaded == false) {
     init_contents();
-    contentsLoaded = true;
   }
 });
-
-// Load html page into div element..
-function load_page(element, path, tag) {
-    var html = '<object type="text/html" data="' + path + '" ></object>';
-    appendList(element, html);
-    var nav = '<a href="#">' + tag + '</a>';
-    appendList(element+'_nav', nav);
-}
 
 function appendList(list, item) {
   var ul = document.getElementById(list);
@@ -25,6 +15,7 @@ function appendList(list, item) {
 }
 
 function init_contents() {
+  contentsLoaded = true;
   console.log("Load More Page..");
   ajax_load_page("karmanode_load", "/htm/karmanode-install.htm", "Install");
   //load_page("karmanode_load", "htm/karmanode-install.htm", "Install");

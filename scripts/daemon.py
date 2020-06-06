@@ -132,7 +132,7 @@ class OhmRoot(object):
                 self.addHeightCache(height)
             else:
                 height = self.getHeightCacheVal()
-            retry = self.getHeightCache()
+            retry = self.getHeightCacheTime()
         except Exception as ex:
             print("Failed to fetch Height!")
             print(ex)
@@ -150,7 +150,7 @@ class OhmRoot(object):
                 self.addConnsCache(conns)
             else:
                 conns = self.getConnsCacheVal()
-            retry = self.getConnsCache()
+            retry = self.getConnsCacheTime()
         except Exception as ex:
             print("Failed to fetch Connection count!")
             print(ex)
@@ -174,7 +174,7 @@ class OhmRoot(object):
             else:
                 height = self.getHeightCacheVal()
                 blockh = self.getBlockCacheVal()
-            retry = self.getBlockCache()
+            retry = self.getBlockCacheTime()
         except Exception as ex:
             print("Failed to fetch Block!")
             print(ex)

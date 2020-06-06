@@ -2,7 +2,7 @@
 var contentsLoaded = false;
 window.addEventListener('scroll', function() {
   var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  if (scrollTop > 500 && contentsLoaded == false) {
+  if (scrollTop > 600 && contentsLoaded == false) {
     init_contents();
   }
 });

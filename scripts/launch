@@ -10,6 +10,7 @@ tmuxFile="/tmp/ohmc"
 tmuxName="ohmiesite"
 
 pyFile="daemon.py"
+pyArgs="-m prod"
 
 
 #############################
@@ -31,7 +32,7 @@ start)
 echo "Starting Daemon..."
 $0 fixpermissions
 sleep 1
-sudo -u $user tmux -S $tmuxFile new-session -s $tmuxName -d "cd $daemonDir; python3 $pyFile"
+sudo -u $user tmux -S $tmuxFile new-session -s $tmuxName -d "cd $daemonDir; python3 $pyFile $pyArgs"
 sleep 1
 echo "Daemon Started."
 ;;

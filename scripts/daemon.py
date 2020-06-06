@@ -3,6 +3,7 @@
 import cherrypy
 import json
 import os
+import sys
 import time
 import smtplib
 import hashlib
@@ -21,21 +22,25 @@ class OhmRoot(object):
     COOLDOWN_TIME = 120  # time in seconds between mail attempts per session..
     hostsAgents = {}  # map of host sessions and last mail times.
     hosts = {}  # map of host sessions and last mail times.
-    cacheHeight = {}
-    cacheBlocks = {}
-    cacheConnct = {}
-
-    localDir = str(Path(os.path.dirname(os.path.realpath(__file__))).resolve().parent)
-    pubDir = localDir + "/public"
-    print( "Root Directory: " + localDir )
-    _cp_config = {'error_page.404': os.path.join(pubDir, "error/404.html")}
+    cacheHeight = {}  # map for cache of height
+    cacheBlocks = {}  # map for cache of block
+    cacheConnct = {}  # map for cache of connections
 
     ###########################################################################
-    def __init__(self):
-        self.version = "0.1"
-        self.conf = self.loadConf()
-        self.COOLDOWN_TIME_IP = self.conf['cooldownhost']
-        self.COOLDOWN_TIME = self.conf['cooldownagent']
+    def __init__(self, config, debug, vdebug):
+        self.debug = debug;
+        self.verbose = vdebug;
+        self.conf = config;
+        self.version = self.conf['version']
+        self.localDir = self.conf['localdir']
+        self.pubDir = self.localDir + "/public"
+        self.COOLDOWN_TIME_IP = self.conf['mail']['cooldownhost']
+        self.COOLDOWN_TIME = self.conf['mail']['cooldownagent']
+        print( "Root Directory: " + self.localDir )
+        print( "Public Directory: " + self.pubDir )
+        print( "[RPC BIND] " + "http://" + self.conf['rpc']['server']  + ":" + self.conf['rpc']['port'] + "/" )
+        # Setup 404 Error Page
+        _cp_config = {'error_page.404': os.path.join(self.pubDir, "error/404.html")}
 
     @cherrypy.expose
     def index(self):
@@ -122,16 +127,17 @@ class OhmRoot(object):
             if self.allowHeightCache():
                 method = "getblockcount"
                 params = []
-                hh = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
+                hh = self.doRpcRequest(method, params)
                 height = hh['result']
                 self.addHeightCache(height)
             else:
                 height = self.getHeightCacheVal()
+            retry = self.getHeightCache()
         except Exception as ex:
             print("Failed to fetch Height!")
             print(ex)
             return "error"
-        return json.dumps({"height": height })
+        return json.dumps({"height": height, "refreshtime" : retry })
 
     @cherrypy.expose
     def getconnectioncount(self):
@@ -139,16 +145,17 @@ class OhmRoot(object):
             if self.allowHeightCache():
                 method = "getconnectioncount"
                 params = []
-                cc = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
+                cc = self.doRpcRequest(method, params)
                 conns = cc['result']
                 self.addConnsCache(conns)
             else:
                 conns = self.getConnsCacheVal()
+            retry = self.getConnsCache()
         except Exception as ex:
             print("Failed to fetch Connection count!")
             print(ex)
             return "error"
-        return json.dumps({"connections": conns })
+        return json.dumps({"connections": conns, "refreshtime" : retry })
 
     @cherrypy.expose
     def getbestblock(self):
@@ -156,29 +163,30 @@ class OhmRoot(object):
             if self.allowBlockCache():
                 method = "getblockcount"
                 params = []
-                hh = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
+                hh = self.doRpcRequest(method, params)
                 height = hh['result']
                 self.addHeightCache(height, False)
                 method = "getblockhash"
                 params = [ height ]
-                bb = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
+                bb = self.doRpcRequest(method, params)
                 blockh = bb['result']
                 self.addBlockCache(blockh)
             else:
                 height = self.getHeightCacheVal()
                 blockh = self.getBlockCacheVal()
+            retry = self.getBlockCache()
         except Exception as ex:
             print("Failed to fetch Block!")
             print(ex)
             return "error"
-        return json.dumps({ "blockhash": blockh, "height": height })
+        return json.dumps({ "blockhash": blockh, "height": height, "refreshtime" : retry })
 
     ###########################################################################
     # Send Email message
     def sendMail(self, name, email, message):
-        xfrom = self.conf["systemfrom"]
-        xfromName = self.conf["sysnamefrom"]
-        xto = self.conf["fowardto"]
+        xfrom = self.conf['mail']["systemfrom"]
+        xfromName = self.conf['mail']["sysnamefrom"]
+        xto = self.conf['mail']["fowardto"]
         # build the message
         msg = MIMEText(message)
         msg['Subject'] = "[OHMC.TIPS] New Message from '" + name + "'"
@@ -263,33 +271,17 @@ class OhmRoot(object):
         c = str(client);
         return hashlib.sha256(str(h + "::" + c).encode('utf-8')).hexdigest()
 
-    # Loads the config from file into dict
-    def loadConf(self):
-        try:
-            data = json.loads("{}")
-            with open(self.localDir + '/.env/conf.json') as f:
-                data = json.load(f)
-            self.version = data['CONFIG'][0]['Version']
-            username = data['CONFIG'][1]['RPC'][0]['Username']
-            password = data['CONFIG'][1]['RPC'][0]['Password']
-            port = data['CONFIG'][1]['RPC'][0]['Port']
-            sysfrm = data['CONFIG'][2]['EMAIL'][0]['SystemFrom']
-            sysnmefrm = data['CONFIG'][2]['EMAIL'][0]['SystemFromName']
-            fwdto = data['CONFIG'][2]['EMAIL'][0]['FowardTo']
-            chost = data['CONFIG'][3]['XDOS'][0]['CooldownTimeHost']
-            cagnt = data['CONFIG'][3]['XDOS'][0]['CooldownTimeAgent']
-            item = { "username" : username, "password" : password, "port" : port, "fowardto" : fwdto, "systemfrom" : sysfrm, "sysnamefrom" : sysnmefrm, "cooldownhost" : chost, "cooldownagent" : cagnt}
-            print("Config Loaded! Version " + self.version)
-            return item
-        except Exception as ex:
-            print("Config Loading Error!  " + ex)
-            return {}
-
     # Do RPC request
-    def doRpcRequest(self, port, user, pazz, method, params):
-        url = 'http://127.0.0.1:' + port
+    def doRpcRequest(self, method, params):
+        server = self.conf['rpc']['server']
+        port = self.conf['rpc']['port']
+        user = self.conf['rpc']['username']
+        pazz = self.conf['rpc']['password']
+        url = 'http://' + server + ':' + port
         payload = json.dumps({" jsonrpc": "2.0", "id": "pycurl", "method": method, "params": params })
         headers = { 'content-type': 'application/json' }
+        if (self.debug == True):
+            print( "RPC Request= " + str(payload) )
         r = requests.post(url, data=payload, headers=headers, auth=(user, pazz))
         respj = r.json()
         return respj
@@ -319,14 +311,14 @@ class OhmRoot(object):
         th = self.getHeightCache()
         if (th <= 0) :
             return True
-        return ts - th > 30
+        return ts - th > 16
 
     def getHeightCacheTime(self):
         ts = time.time()
         th = self.getHeightCache()
         if (th <= 0) :
             return 0
-        return 30 - (ts - th)
+        return 16 - (ts - th)
 
     # RPC Blocks Caching
     def addBlockCache(self, value):
@@ -352,14 +344,14 @@ class OhmRoot(object):
         th = self.getBlockCache()
         if (th <= 0) :
             return True
-        return ts - th > 30
+        return ts - th > 20
 
     def getBlockCacheTime(self):
         ts = time.time()
         th = self.getBlockCache()
         if (th <= 0) :
             return 0
-        return 30 - (ts - th)
+        return 20 - (ts - th)
 
     # RPC Connections Caching
     def addConnsCache(self, value):
@@ -385,20 +377,105 @@ class OhmRoot(object):
         th = self.getConnsCache()
         if (th <= 0) :
             return True
-        return ts - th > 50
+        return ts - th > 42
 
     def getConnsCacheTime(self):
         ts = time.time()
         th = self.getConnsCache()
         if (th <= 0) :
             return 0
-        return 50 - (ts - th)
+        return 42 - (ts - th)
 
+# Loads the config from file into dict
+def loadConf(dir):
+    try:
+        confpath = dir + '/.env/conf.json'
+        data = json.loads("{}")
+        with open(confpath) as f:
+            data = json.load(f)
+        version = data['CONFIG'][0]['Version']
+        username = data['CONFIG'][1]['RPC'][0]['Username']
+        password = data['CONFIG'][1]['RPC'][0]['Password']
+        server = data['CONFIG'][1]['RPC'][0]['Server']
+        port = data['CONFIG'][1]['RPC'][0]['Port']
+        sysfrm = data['CONFIG'][2]['EMAIL'][0]['SystemFrom']
+        sysnmefrm = data['CONFIG'][2]['EMAIL'][0]['SystemFromName']
+        fwdto = data['CONFIG'][2]['EMAIL'][0]['FowardTo']
+        chost = data['CONFIG'][3]['XDOS'][0]['CooldownTimeHost']
+        cagnt = data['CONFIG'][3]['XDOS'][0]['CooldownTimeAgent']
+        cherrysrv = data['CONFIG'][4]['HTTP'][0]['Server']
+        cherryprt = data['CONFIG'][4]['HTTP'][0]['Port']
+        rpc = { "username" : username, "password" : password, "server" : server, "port" : port }
+        mail = { "fowardto" : fwdto, "systemfrom" : sysfrm, "sysnamefrom" : sysnmefrm, "cooldownhost" : chost, "cooldownagent" : cagnt}
+        srvr = { "server": cherrysrv, "port": cherryprt }
+        item = { "version" : version, "rpc" : rpc, "mail" : mail, "web" : srvr, 'localdir' : dir }
+        print("Config Loaded! Version " + version)
+        return item
+    except Exception as ex:
+        print("Config Loading Error!  " + ex)
+        return {}
 
-# listen on alt port
-cherrypy.server.socket_port = 8771
-# listen on all interfaces
-cherrypy.server.socket_host = '127.0.0.1'
+def main():
+    conf = setup();
+    print( "Prod Daemon Started!" )
+    # start the webserver!
+    cherrypy.quickstart( OhmRoot(conf, False, False) )
 
-# start the webserver!
-cherrypy.quickstart( OhmRoot() )
+def debug():
+    conf = setup();
+    print( "Debug Daemon Started!" )
+    # start the webserver!
+    cherrypy.quickstart( OhmRoot(conf, True, False) )
+
+def dev():
+    conf = setup();
+    print( "Dev Daemon Started!" )
+    # start the webserver!
+    cherrypy.quickstart( OhmRoot(conf, True, True) )
+
+def setup():
+    print( "Starting..." )
+    localDir = str(Path(os.path.dirname(os.path.realpath(__file__))).resolve().parent)
+    if os.path.exists(localDir + "/.env") == False or os.path.exists(localDir + "/.env/" + "conf.json") == False:
+        if os.path.exists(localDir + "/.env") == False:
+            os.mkdir(localDir + "/.env")
+            print( "Created '.env' Directory!" )
+        print( "ERROR!! Configuration File 'conf.json' was not found or is invalid!" )
+        print( "Run Aborted!" )
+        sys.exit()
+        return
+    conf = loadConf(localDir)
+    print( "Binding HTTP Server Listener on " + str(conf['web']['server']) + ":" + str(conf['web']['port']) )
+    # listen on all interfaces
+    cherrypy.server.socket_host = conf['web']['server']
+    # listen on alt port
+    cherrypy.server.socket_port = conf['web']['port']
+    return conf
+
+###############################################################################
+if __name__ == '__main__':
+    args = sys.argv[1:];
+    if len(args) > 0:
+        if args[0] == '-m' and len(args) > 1:
+            if args[1] == 'prod':
+                main()
+                exit()
+            elif args[1] == 'debug':
+                debug()
+                exit()
+            elif args[1] == 'develop' or args[1] == 'dev':
+                debug()
+                exit()
+            else:
+                print("MODE ARGS: prod|debug|develop")
+        elif args[0] == '-r':
+            main()
+            exit()
+        elif args[0] == '-help' or args[0] == '-h' or args[0] == '?':
+            print( "Ohm Web Daemon Commands:" )
+            print( "> daemon.py -r         - Runs the daemon normally (production)" )
+            print( "> daemon.py -m prod    - Runs the daemon in production mode" )
+            print( "> daemon.py -m debug   - Runs the daemon is debug mode" )
+            print( "> daemon.py -m dev     - Runs the daemon is development mode" )
+            exit()
+    print("COMMAND HELP: daemon.py ?")

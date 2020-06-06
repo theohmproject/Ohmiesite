@@ -6,6 +6,7 @@ import os
 import time
 import smtplib
 import hashlib
+import requests
 from datetime import datetime
 from email.mime.text import MIMEText
 from email.header import Header
@@ -22,9 +23,10 @@ class OhmRoot(object):
     hostsAgents = {}  # map of host sessions and last mail times.
     hosts = {}  # map of host sessions and last mail times.
 
-    localDir = str(Path(os.path.dirname(os.path.realpath(__file__))).resolve().parent) + "/public"
+    localDir = str(Path(os.path.dirname(os.path.realpath(__file__))).resolve().parent)
+    pubDir = localDir + "/public"
     print( "Root Directory: " + localDir )
-    _cp_config = {'error_page.404': os.path.join(localDir, "error/404.html")}
+    _cp_config = {'error_page.404': os.path.join(pubDir, "error/404.html")}
 
     @cherrypy.expose
     def index(self):
@@ -192,6 +194,36 @@ class OhmRoot(object):
         h = str(host);
         c = str(client);
         return hashlib.sha256(str(h + "::" + c).encode('utf-8')).hexdigest()
+
+    def getBlockHeight(self, port, user, pazz):
+        method = "getblockcount"
+        params = []
+        url = 'http://127.0.0.1:' + port
+        payload = {" jsonrpc": "1.0", "id":"pycurl", "method": method, "params": params }
+        headers = { 'content-type': 'application/json', 'Accept-Charset': 'UTF-8' }
+        r = requests.post(url, data=payload, headers=headers)
+        respj = r.json()
+
+    def loadConf(self):
+        data = json.loads("{}")
+        with open(self.localDir + '/.env/conf.json') as f:
+            data = json.load(f)
+        username = str(data['CONFIG'][1]['RPC'][0]['Username'])
+        password = str(data['CONFIG'][1]['RPC'][0]['Password'])
+        port = str(data['CONFIG'][1]['RPC'][0]['Port'])
+        item = [ username, password, port ]
+        return item
+
+    @cherrypy.expose
+    def testrpc(self):
+        conf = self.loadConf()
+        try:
+            height = self.getBlockHeight(conf[2], conf[0], conf[1])
+        except:
+            print("Failed to fetch Height!")
+            return "error"
+        print(str(height))
+        return height
 
 # listen on alt port
 cherrypy.server.socket_port = 8771

@@ -2,7 +2,7 @@
 var contentsLoaded = false;
 
 window.addEventListener('scroll', function() {
-  element = document;
+  element = document.getElementById("content");
   var a = element.scrollTop;
   var b = element.scrollHeight - element.clientHeight;
   var c = a / b;

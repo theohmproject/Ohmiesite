@@ -1,4 +1,35 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # Ohmcoin Simple Web Server
+# Copyright (c) 2020 Cryptech Services (squidicuz)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
+__author__ = "squidicuz (Jon O)"
+__copyright__ = "Copyright 2020, Cryptech Services"
+__credits__ = ["RasAlGhul", "SeqSEE"]
+__license__ = "MIT"
+__version__ = "1.2.1"
+__maintainer__ = "squidicuz"
+__email__ = "squid@sqdmc.net"
+__status__ = "Development"
 
 import cherrypy
 import json
@@ -452,6 +483,12 @@ def setup():
     cherrypy.server.socket_port = conf['web']['port']
     return conf
 
+def shutdown():
+    print("Shutdown Signal Sent!")
+    time.sleep(1)
+    cherrypy.engine.exit()
+    time.sleep(2)
+
 ###############################################################################
 if __name__ == '__main__':
     args = sys.argv[1:];
@@ -471,9 +508,13 @@ if __name__ == '__main__':
         elif args[0] == '-r':
             main()
             exit()
+        elif args[0] == '-s' or args[0] == '-stop':
+            shutdown()
+            exit()
         elif args[0] == '-help' or args[0] == '-h' or args[0] == '?':
-            print( "Ohm Web Daemon Commands:" )
+            print( "================ Ohm Web Daemon Commands ================" )
             print( "> daemon.py -r         - Runs the daemon normally (production)" )
+            print( "> daemon.py -s         - Stops the daemon safely" )
             print( "> daemon.py -m prod    - Runs the daemon in production mode" )
             print( "> daemon.py -m debug   - Runs the daemon is debug mode" )
             print( "> daemon.py -m dev     - Runs the daemon is development mode" )

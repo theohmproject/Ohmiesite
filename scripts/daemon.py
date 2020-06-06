@@ -21,6 +21,9 @@ class OhmRoot(object):
     COOLDOWN_TIME = 120  # time in seconds between mail attempts per session..
     hostsAgents = {}  # map of host sessions and last mail times.
     hosts = {}  # map of host sessions and last mail times.
+    cacheHeight = {}
+    cacheBlocks = {}
+    cacheConnct = {}
 
     localDir = str(Path(os.path.dirname(os.path.realpath(__file__))).resolve().parent)
     pubDir = localDir + "/public"
@@ -110,6 +113,64 @@ class OhmRoot(object):
             # send response
             message = { "response" : False, "status" : True, "message" : "you are doing this too often!", "retry" : self.getAgentTime(agentHash), "id" : agentHash }
             return json.dumps(message)
+
+    ###########################################################################
+    # API Functions..
+    @cherrypy.expose
+    def getblockheight(self):
+        try:
+            if self.allowHeightCache():
+                method = "getblockcount"
+                params = []
+                hh = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
+                height = hh['result']
+                self.addHeightCache()
+            else:
+                height = self.getHeightCacheVal()
+        except Exception as ex:
+            print("Failed to fetch Height!")
+            print(ex)
+            return "error"
+        return json.dumps({"height": height })
+
+    @cherrypy.expose
+    def getconnectioncount(self):
+        try:
+            if self.allowHeightCache():
+                method = "getconnectioncount"
+                params = []
+                cc = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
+                conns = cc['result']
+                self.addConnsCache()
+            else:
+                conns = self.getConnsCacheVal()
+        except Exception as ex:
+            print("Failed to fetch Connection count!")
+            print(ex)
+            return "error"
+        return json.dumps({"connections": conns })
+
+    @cherrypy.expose
+    def getbestblock(self):
+        try:
+            if self.allowBlockCache():
+                method = "getblockcount"
+                params = []
+                hh = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
+                height = hh['result']
+                method = "getblockhash"
+                params = [ height ]
+                bb = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
+                blockh = bb['result']
+                self.addBlockCache()
+            else:
+                height = self.getHeightCacheVal()
+                blockh = self.getBlockCacheVal()
+        except Exception as ex:
+            print("Failed to fetch Block!")
+            print(ex)
+            return "error"
+        return json.dumps({ "blockhash": blockh, "height": height })
 
     ###########################################################################
     # Send Email message
@@ -232,50 +293,111 @@ class OhmRoot(object):
         respj = r.json()
         return respj
 
-    ###########################################################################
-    # API Functions..
-    @cherrypy.expose
-    def getblockheight(self):
-        try:
-            method = "getblockcount"
-            params = []
-            hh = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
-            height = hh['result']
-        except Exception as ex:
-            print("Failed to fetch Height!")
-            print(ex)
-            return "error"
-        return json.dumps({"height": height })
+    # RPC Height Caching
+    def addHeightCache(self, value):
+        host = "local"
+        ts = time.time()
+        self.cacheHeight[host] = ts
+        self.cacheHeight[host + '_val'] = value
 
-    @cherrypy.expose
-    def getconnectioncount(self):
-        try:
-            method = "getconnectioncount"
-            params = []
-            cc = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
-            conns = cc['result']
-        except Exception as ex:
-            print("Failed to fetch Connection count!")
-            print(ex)
-            return "error"
-        return json.dumps({"connections": conns })
+    def getHeightCache(self):
+        host = "local"
+        if host in self.cacheHeight:
+            return self.cacheHeight[host];
+        return 0
 
-    @cherrypy.expose
-    def getbestblock(self):
-        try:
-            method = "getblockcount"
-            params = []
-            hh = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
-            height = hh['result']
-            method = "getblockhash"
-            params = [ height ]
-            bb = self.doRpcRequest(self.conf['port'], self.conf['username'], self.conf['password'], method, params)
-            blockh = bb['result']
-        except Exception as ex:
-            print("Failed to fetch Block!")
-            print(ex)
-            return "error"
-        return json.dumps({ "blockhash": blockh, "height": height })
+    def getHeightCacheVal(self):
+        host = "local_val"
+        if host in self.cacheHeight:
+            return self.cacheHeight[host];
+        return 0
+
+    def allowHeightCache(self):
+        host = "local"
+        ts = time.time()
+        th = self.getHeightCache(host)
+        if (th <= 0) :
+            return True
+        return ts - th > 30
+
+    def getHeightCacheTime(self):
+        host = "local"
+        ts = time.time()
+        th = self.getHeightCache(host)
+        if (th <= 0) :
+            return 0
+        return 30 - (ts - th)
+
+    # RPC Blocks Caching
+    def addBlockCache(self):
+        host = "local"
+        ts = time.time()
+        self.cacheBlocks[host] = ts
+        self.cacheBlocks[host + '_val'] = ts
+
+    def getBlockCache(self):
+        host = "local"
+        if host in self.cacheBlocks:
+            return self.cacheBlocks[host];
+        return 0
+
+    def getBlockCacheVal(self):
+        host = "local_val"
+        if host in self.cacheBlocks:
+            return self.cacheBlocks[host];
+        return 0
+
+    def allowBlockCache(self):
+        host = "local"
+        ts = time.time()
+        th = self.getAggetBlockCacheent(host)
+        if (th <= 0) :
+            return True
+        return ts - th > 30
+
+    def getBlockCacheTime(self):
+        host = "local"
+        ts = time.time()
+        th = self.getBlockCache(host)
+        if (th <= 0) :
+            return 0
+        return 30 - (ts - th)
+
+    # RPC Connections Caching
+    def addConnsCache(self):
+        host = "local"
+        ts = time.time()
+        self.cacheConnct[host] = ts
+        self.cacheConnct[host + '_val'] = ts
+
+    def getConnsCache(self):
+        host = "local"
+        if host in self.cacheConnct:
+            return self.cacheConnct[host];
+        return 0
+
+    def getConnsCacheVal(self):
+        host = "local_val"
+        if host in self.cacheConnct:
+            return self.cacheConnct[host];
+        return 0
+
+    def allowConnsCache(self):
+        host = "local"
+        ts = time.time()
+        th = self.getConnsCache(host)
+        if (th <= 0) :
+            return True
+        return ts - th > 50
+
+    def getConnsCacheTime(self):
+        host = "local"
+        ts = time.time()
+        th = self.getConnsCache(host)
+        if (th <= 0) :
+            return 0
+        return 50 - (ts - th)
+
 
 # listen on alt port
 cherrypy.server.socket_port = 8771

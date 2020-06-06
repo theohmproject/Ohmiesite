@@ -195,14 +195,12 @@ class OhmRoot(object):
         c = str(client);
         return hashlib.sha256(str(h + "::" + c).encode('utf-8')).hexdigest()
 
-    def getBlockHeight(self, port, user, pazz):
-        method = "getblockcount"
-        params = []
+    def doRpcRequest(self, port, user, pazz, method, params):
         url = 'http://127.0.0.1:' + port
         payload = json.dumps({" jsonrpc": "2.0", "id": "pycurl", "method": method, "params": params })
         headers = { 'content-type': 'application/json' }
         r = requests.post(url, data=payload, headers=headers, auth=(user, pazz))
-        print(str(r))
+        #print(str(r))
         respj = r.json()
         return respj
 
@@ -217,16 +215,38 @@ class OhmRoot(object):
         return item
 
     @cherrypy.expose
-    def testrpc(self):
+    def getblockheight(self):
         conf = self.loadConf()
         try:
-            height = self.getBlockHeight(conf[2], conf[0], conf[1])
+            method = "getblockcount"
+            params = []
+            hh = self.doRpcRequest(conf[2], conf[0], conf[1], method, params)
+            height = hh['result']
         except Exception as ex:
             print("Failed to fetch Height!")
             print(ex)
             return "error"
         print(str(height['result']))
-        return json.dumps(height)
+        return json.dumps({"height": height }})
+
+    @cherrypy.expose
+    def getbestblock(self):
+        conf = self.loadConf()
+        try:
+            method = "getblockcount"
+            params = []
+            hh = self.doRpcRequest(conf[2], conf[0], conf[1], method, params)
+            height = hh['result']
+            method = "getblock"
+            params = [ height ]
+            bb = self.doRpcRequest(conf[2], conf[0], conf[1], method, params)
+            blockh = bb['result']
+        except Exception as ex:
+            print("Failed to fetch Block!")
+            print(ex)
+            return "error"
+        print(str(height['result']))
+        return json.dumps({ "blockhash": blockh, "height": height })
 
 # listen on alt port
 cherrypy.server.socket_port = 8771

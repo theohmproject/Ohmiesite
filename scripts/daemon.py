@@ -29,10 +29,10 @@ class OhmRoot(object):
 
     ###########################################################################
     def __init__(self):
-        version = "0.1"
-        conf = self.loadConf()
-        COOLDOWN_TIME_IP = conf['cooldownhost']
-        COOLDOWN_TIME = conf['cooldownagent']
+        self.version = "0.1"
+        self.conf = self.loadConf()
+        self.COOLDOWN_TIME_IP = self.conf['cooldownhost']
+        self.COOLDOWN_TIME = self.conf['cooldownagent']
 
     @cherrypy.expose
     def index(self):

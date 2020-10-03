@@ -9,7 +9,6 @@
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css">
 		<link rel="stylesheet" type="text/css" href="css/ohmcoin.css">
 	</head>
-
 	<body>
 
 <!-- begin fork me on github -->
@@ -27,7 +26,7 @@
 					<nav class="uk-navbar uk-navbar-container uk-navbar-transparent" data-uk-navbar>
 						<div class="uk-navbar-left">
 							<div class="uk-navbar-item uk-padding-remove-horizontal">
-								<a class="uk-logo" title="Logo" href=""><img src="img/ohmcoin-logo.png" alt="Logo"> hmcoin</a>
+								<a class="uk-logo" title="Logo" href=""><img src="https://www.ohmcoin.org/images/logoed429ba9.png" alt="Logo"> hmcoin</a>
 							</div>
 						</div>
 						<div class="uk-navbar-right">
@@ -36,7 +35,7 @@
 								<li>
 									<a href="#">Exchange</a>
 								</li>
-								<li><a href="">Explore</a></li>
+								<li><a href="//explore.ohmcoin.org">Explore</a></li>
 							</ul>
 							<a class="uk-navbar-toggle uk-navbar-item uk-hidden@s" data-uk-toggle data-uk-navbar-toggle-icon href="#offcanvas-nav"></a>
 						</div>
@@ -181,9 +180,18 @@
 							Staking Ohmcoin is not the only way to support the ohmcoin network, by setting up a karmanode you can earn rewards while helping process transactions.
 						</p>
 						<!-- begin karmanode guide -->
-						<a class="uk-button uk-button-primary uk-border-pill karmanode-install" data-uk-icon="arrow-right" href="#karmanode" uk-toggle>LEARN MORE</a>
-						<div id="karmanode" class="uk-modal-full karmanode-install-container" uk-modal>
-<!-- load karmanode-install -->
+						<a class="uk-button uk-button-primary uk-border-pill" data-uk-icon="arrow-right" href="#karmanode" uk-toggle>LEARN MORE</a>
+						<div id="karmanode" class="uk-modal-full" uk-modal>
+   						 <div class="uk-modal-dialog">
+       						 <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+        						<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+            						<div class="uk-background-cover" style="background-image: url('images/photo.jpg');" uk-height-viewport></div>
+           							 <div class="uk-padding-large">
+               						 <h1>This should be Lazy loaded(ajax)</h1>
+               						 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+           							 </div>
+       							 </div>
+   							 </div>
 						</div>
 						<!-- end karmanode guide -->
 					</div>
@@ -194,18 +202,7 @@
 			</div>
 		</section>
 
-    <script>
-        document.getElementByClassName(‘karmanode-install’).addEventListener('click', fetchUserData);
 
-        function karmanode-install(){
-            fetch(‘htm/karmanode-install.htm’)
-                .then(res => {
-                 return res.text();
-                 })
-             .then(data => {
-         $(‘.karmanode-install-container’).html(data);
-         });
-     </script>
 
 		<section class="uk-cover-container overlay-wrap">
 			<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset="https://picsum.photos/640/650/?image=770 640w,
@@ -353,70 +350,31 @@
 							<li>Team</li>
 							<li>Work</li>
 							<li>Culture</li>
-							<li><a href="#contact" uk-toggle="target: #contact">Contact Us</a></li>
-
-
-<!-- contact form -->
-<div id="contact" class="uk-modal-full" uk-modal>
-<div class="uk-modal-dialog">
-
-<button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
-<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
-<div class="uk-background-cover" style="background-image: url('images/photo.jpg');" uk-height-viewport></div>
-<div class="uk-padding-large">
-
-	<div id="contact_form_container">
-		<script src='https://www.google.com/recaptcha/api.js'></script>
-
-		<form  method="post" id="contact_form" onsubmit="contact_form_submit(this, event);">
-			<fieldset class="uk-fieldset">
-			  <legend class="uk-legend">Contact Us</legend>
-
-			      <div class="uk-margin">
-			      <input class="uk-input" id="name" type="text" name="Name" placeholder="Name" required maxlength="50">
-			      </div>
-
-			      <div class="uk-margin">
-			      <input class="uk-input" id="email" type="email" name="Email" placeholder="Email" required maxlength="50">
-			      </div>
-
-			      <div class="uk-margin">
-			      <textarea class="uk-textarea" id="message" name="Message" placeholder="Message" rows="10" maxlength="6000" required></textarea>
-			      </div>
-
-            <div class="g-recaptcha" data-sitekey="6LdVSZ0UAAAAAH_HJqJoiOSlvkUTKGTuIDYfkS9C"></div>
-
-			      <div class="uk-margin">
-			      <button class="uk-button uk-button-primary uk-border-pill" type="submit" >Submit Message</button>
-			      </div>
-
-			</fieldset>
-		</form>
-	</div>
-  <div id="success_message" style="display:none">
-      <h3>Submitted the form successfully!</h3>
-      <div id="success_message_div">
-      	We will get back to you soon.
-      </div>
-			<div style="margin-top: 30px;">
-				<button class="uk-modal-close uk-button uk-button-danger uk-border-pill" type="button">Close Page</button>
-			</div>
-  </div>
-  <div id="error_message" style="width:100%; height:100%; display:none;">
-      <h3>Error!</h3>
-			<div id="error_message_div">
-      	Sorry there was an error sending your form.
-			</div>
-			<div style="margin-top: 30px;">
-				<button class="uk-modal-close uk-button uk-button-danger uk-border-pill" type="button">Close Page</button>
-			</div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-<!-- contact form -->
-
+							<li><script type="text/javascript" language="javascript">
+							<!--
+							// Email obfuscator script 2.1 by Tim Williams, University of Arizona
+							// Random encryption key feature coded by Andrew Moulden
+							// This code is freeware provided these four comment lines remain intact
+							// A wizard to generate this code is at http://www.jottings.com/obfuscator/
+							{ coded = "nxVmInm@xZqnx6V.xzk"
+							  key = "ZPnDzyHRACBqNgM8I62UdVb9l1JQSLoukK4tXOGf0T5hFcer3xwWpjm7sYEaiv"
+							  shift=coded.length
+							  link=""
+							  for (i=0; i<coded.length; i++) {
+							    if (key.indexOf(coded.charAt(i))==-1) {
+							      ltr = coded.charAt(i)
+							      link += (ltr)
+							    }
+							    else {
+							      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+							      link += (key.charAt(ltr))
+							    }
+							  }
+							document.write("<a href='mailto:"+link+"'>Contact</a>")
+							}
+							//-->
+							</script><noscript>Sorry, you need Javascript on to email me.</noscript>
+							</li>
 						</ul>
 					</div>
 					<div class="uk-width-1-6@m">
@@ -466,7 +424,5 @@
 		<!-- JS FILES -->
 		<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
-		<script src="js/contact.js"></script>
-		<script src="js/home.js"></script>
 	</body>
 </html>

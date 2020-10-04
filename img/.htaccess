@@ -1,0 +1,2 @@
+#redirect subdir to root
+RewriteRule ^subdirectory/(.*)$ /$1 [R=301,NC,L]

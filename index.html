@@ -103,7 +103,7 @@
 
 				<ul class="uk-switcher uk-margin">
 					<li>
-						<div class="uk-grid uk-child-width-1-2@l uk-flex-middle" data-uk-grid data-uk-scrollspy="target: > div; cls: uk-animation-slide-left-medium">
+						<div class="uk-child-width-1-2@l uk-flex-middle" uk-grid data-uk-scrollspy="target: > div; cls: uk-animation-slide-left-medium">
 							<div>
 								<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/marketing-1.svg" alt="" data-uk-img>
 							</div>
@@ -115,7 +115,7 @@
 									tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 									quis nostrud exercitation.
 								</p>
-								<div class="uk-grid uk-child-width-1-2@s" data-uk-grid>
+								<div class="uk-child-width-1-2@s" uk-grid>
 									<div>
 										<h4>Great stuff</h4>
 										<p>Ut enim ad minim veniam, quis nostrud magna aliqua exercitation. <a href="">Learn more.</a></p>
@@ -129,7 +129,7 @@
 						</div>
 					</li>
 					<li>
-						<div class="uk-grid uk-child-width-1-2@l uk-flex-middle" data-uk-grid data-uk-scrollspy="target: > div; cls: uk-animation-slide-left-medium">
+						<div class="uk-child-width-1-2@l uk-flex-middle" uk-grid data-uk-scrollspy="target: > div; cls: uk-animation-slide-left-medium">
 							<div>
 								<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/marketing-8.svg" alt="" data-uk-img>
 							</div>
@@ -141,7 +141,7 @@
 									tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 									quis nostrud exercitation.
 								</p>
-								<div class="uk-grid uk-child-width-1-2@s" data-uk-grid>
+								<div class="uk-child-width-1-2@s" uk-grid>
 									<div>
 										<h4>Great stuff</h4>
 										<p>Ut enim ad minim veniam, quis nostrud magna aliqua exercitation. <a href="">Learn more.</a></p>
@@ -155,7 +155,7 @@
 						</div>
 					</li>
 					<li>
-						<div class="uk-grid uk-child-width-1-2@l uk-flex-middle" data-uk-grid data-uk-scrollspy="target: > div; cls: uk-animation-slide-left-medium">
+						<div class="uk-child-width-1-2@l uk-flex-middle" uk-grid data-uk-scrollspy="target: > div; cls: uk-animation-slide-left-medium">
 							<div>
 								<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/marketing-9.svg" alt="" data-uk-img>
 							</div>
@@ -167,7 +167,7 @@
 									tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 									quis nostrud exercitation.
 								</p>
-								<div class="uk-grid uk-child-width-1-2@s" data-uk-grid>
+								<div class="uk-child-width-1-2@s" uk-grid>
 									<div>
 										<h4>Great stuff</h4>
 										<p>Ut enim ad minim veniam, quis nostrud magna aliqua exercitation. <a href="">Learn more.</a></p>
@@ -190,19 +190,28 @@
 
 		<section class="uk-section uk-section-secondary uk-section-large">
 			<div class="uk-container">
-				<div class="uk-grid uk-child-width-1-2@l uk-flex-middle">
+				<div class="uk-child-width-1-2@l uk-flex-middle" uk-grid>
 					<div>
 						<h6>Learn How to Run a Karmanode</h6>
 						<h2 class="uk-margin-small-top uk-h1">Support Ohmcoin and earn rewards</h2>
 						<p class="subtitle-text">
 							Staking Ohmcoin is not the only way to support the ohmcoin network, by setting up a karmanode you can earn rewards while helping process transactions.
 						</p>
-						<!-- begin karmanode guide -->
 						<a class="uk-button uk-button-primary uk-border-pill" data-uk-icon="arrow-right" href="#karmanode" uk-toggle>LEARN MORE</a>
+					</div>
+					<div data-uk-scrollspy="cls: uk-animation-fade">
+						<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/marketing-2.svg" data-uk-img alt="Image">
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+						<!-- begin karmanode guide -->
 						<div id="karmanode" class="uk-modal-full" uk-modal>
    						 <div class="uk-modal-dialog">
        						 <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
-        						<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+        						<div class="-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
             						<div class="uk-background-cover" style="background-image: url('images/photo.jpg');" uk-height-viewport></div>
            							 <div class="uk-padding-large">
                						 <h1>This should be Lazy loaded(ajax)</h1>
@@ -212,14 +221,6 @@
    							 </div>
 						</div>
 						<!-- end karmanode guide -->
-					</div>
-					<div data-uk-scrollspy="cls: uk-animation-fade">
-						<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/marketing-2.svg" data-uk-img alt="Image">
-					</div>
-				</div>
-			</div>
-		</section>
-
 
 
 		<section class="uk-cover-container overlay-wrap">
@@ -231,7 +232,7 @@
 			data-src="https://picsum.photos/1200/650/?image=770" alt="" data-uk-cover data-uk-img
 			>
 			<div class="uk-container uk-position-z-index uk-position-relative uk-section uk-section-xlarge uk-light">
-				<div class="uk-grid uk-flex-right">
+				<div class=" uk-flex-right">
 
 					<div class="uk-width-2-5@m" data-uk-parallax="y: 50,-50; easing: 0; media:@l">
 						<h6>TESTIMONIALS</h6>
@@ -275,7 +276,7 @@
 				<h2 class="uk-margin-remove uk-h1">Buy, Sell and Invest with Ohmcoin</h2>
 			</div>
 			<div class="uk-container">
-				<div class="uk-flex-center uk-grid uk-grid-large uk-child-width-1-3@m" data-uk-grid data-uk-scrollspy="target: > div; delay: 150; cls: uk-animation-slide-bottom-medium">
+				<div class="uk-flex-center uk-grid-large uk-child-width-1-3@m" uk-grid data-uk-scrollspy="target: > div; delay: 150; cls: uk-animation-slide-bottom-medium">
 					<div class="uk-text-center">
 					  <a href="https://socialsend.net/user/exchange/BTC/OHMC" target="blank" class="uk-link-toggle">
 						<img src="https://www.ohmcoin.org/images/exchanges/socialsend.png" alt="Social Send Exchange">
@@ -319,7 +320,7 @@
 		<!-- LOGOS -->
 		<div class="uk-section uk-section-small uk-section-muted">
 			<div class="uk-container uk-container-small">
-				<div class="uk-grid uk-child-width-1-4 uk-child-width-expand@m logos-grid" data-uk-grid data-uk-scrollspy="cls: uk-animation-scale-down; target: > div > img; delay: 100">
+				<div class="uk-child-width-1-4 uk-child-width-expand@m logos-grid" uk-grid data-uk-scrollspy="cls: uk-animation-scale-down; target: > div > img; delay: 100">
 					<div>
 						<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/logo-1.svg" data-uk-img alt="Image">
 					</div>
@@ -351,7 +352,7 @@
 		<!-- FOOTER -->
 		<footer class="uk-section uk-section-secondary uk-padding-remove-bottom">
 			<div class="uk-container">
-				<div class="uk-grid uk-grid-large" data-uk-grid>
+				<div class="uk-grid-large" uk-grid>
 					<div class="uk-width-1-2@m">
 						<h5>OUR COMPANY</h5>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud cillum dolore eu fugiat nulla contact to: <a href="#" title="">info@company.com</a></p>

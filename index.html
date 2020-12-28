@@ -122,7 +122,7 @@
 									</div>
 									<div>
 										<h4>Stakers</h4>
-										<p>Stake holders, who currently create new ohmcoin and pay karmanodes donate that donate to crowdfunds will earn, once the utility is added, an increase in staking weight as a reward for their "Act of Kindness".</p>
+										<p>Stake holders, who currently create new ohmcoin and pay karmanodes donate that donate to campaigns will earn, once the utility is added, an increase in staking weight as a reward for their "Act of Kindness".</p>
 									</div>
 								</div>
 							</div>
@@ -169,13 +169,14 @@
 			<div class="uk-container">
 				<div class="uk-child-width-1-2@l uk-flex-middle" uk-grid>
 					<div>
-						<h6>Support Ohmcoin and Earn Rewards</h6>
-						<h2 class="uk-margin-small-top uk-h1">Support Ohmcoin and earn rewards</h2>
+						<h2 class="uk-margin-small-top uk-h1">Support Ohmcoin and Earn Rewards</h2>
 						<p class="subtitle-text">
-						This is about the reward structure
+						Choose the following guides below to learn how to earn rewards through staking or by hosting a karmanode.
 						</p>
-						<a class="uk-button uk-button-primary uk-border-pill" href="#staking" uk-toggle>Staking</a>
-						<a class="uk-button uk-button-primary uk-border-pill" href="#karmanode" uk-toggle>Karmanodes</a>
+						<div class="uk-width-2-2@l" uk-grid>
+						  <div class=""><a class="uk-button uk-button-primary uk-border-pill" href="#staking" uk-toggle>Staking</a></div>
+						  <div class=""><a class="uk-button uk-button-primary uk-border-pill" href="#karmanode" uk-toggle>Karmanodes</a></div>
+						</div>
 					</div>
 					<div uk-scrollspy="cls: uk-animation-fade">
 						<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/marketing-2.svg" uk-img alt="Image">
@@ -199,20 +200,66 @@
 						</div>
 						<!-- end staking guide -->
 
-						<!-- begin karmanode guide -->
+						<!-- begin karmanode guide desktop-->
 						<div id="karmanode" class="uk-modal-full" uk-modal>
-   						 <div class="uk-modal-dialog">
-       						 <button class="uk-modal-close-default uk-close-large uk-icon-button" type="button" uk-close></button>
-        						<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+   						   <div class="uk-modal-dialog"><button class="uk-modal-close-default uk-close-large uk-icon-button" type="button" uk-close></button>
+        						<ul class="uk-switcher karmanode-guide">
+        						 <li>
+        						 <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
             						<div class="uk-background-cover" style="background-image: url('img/photo.jpg');" uk-height-viewport></div>
            							 <div class="uk-padding-large">
                						 <h1>Karmnode Guide</h1>
-               						 <p>Staking Ohmcoin is not the only way to support the ohmcoin network, by setting up a karmanode you can earn rewards while helping process transactions.</p>
+               						 <p>Staking Ohmcoin is not the only way to support the ohmcoin network, by setting up a karmanode you can earn rewards while helping process transactions.The following guide will help you get started</p>
+               						   <div>
+        								  <h4>Requirements</h4>
+               						       <ul>
+               						        <li>Password protected wallet with at least 3001 Ohmcoin available</li>
+               						        <li>Access to a Linux VPS such as one from <a href="https://www.vultr.com/?ref=7315147">Vultr</a>(Ubuntu 18 with 2GB or higher recommended)</li>
+               						        <li> Access to a terminal or equivalent to ssh into your VPS.
+               						        	<ul>
+               						        		<li>*nix: Terminal, xTerm or equivalent</li>
+               						        		<li>Mac: Terminal (found in /Applications/utilities)</li>
+               						        		<li>Windows: <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">Putty</a> or equivalent</li>
+               						        	</ul>
+               						       </ul>
+               						      </div>
            							 </div>
        							 </div>
-   							 </div>
+       							 </li>
+       							 <li>
+       							 <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+            						<div class="uk-background-cover" style="background-image: url('img/photo.jpg');" uk-height-viewport></div>
+           							 <div class="uk-padding-large">
+               						 <h1>Karmnode Guide</h1>
+               						 <p>Staking Ohmcoin is not the only way to support the ohmcoin network, by setting up a karmanode you can earn rewards while helping process transactions.The following guide will help you get started</p>
+               						   <div>
+        								  <h4>Requirements</h4>
+               						       <ul>
+               						        <li>Password protected wallet with at least 3001 Ohmcoin available</li>
+               						        <li>Access to a Linux VPS such as one from <a href="https://www.vultr.com/?ref=7315147">Vultr</a>(Ubuntu 18 with 2GB or higher recommended)</li>
+               						        <li> Access to a terminal or equivalent to ssh into your VPS.
+               						        	<ul>
+               						        		<li>*nix: Terminal, xTerm or equivalent</li>
+               						        		<li>Mac: Terminal (found in /Applications/utilities)</li>
+               						        		<li>Windows: <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">Putty</a> or equivalent</li>
+               						        	</ul>
+               						       </ul>
+               						      </div>
+           							 </div>
+       							 </div></li>
+       							</ul>
+
+       				          <!-- begin karmanode guide nav -->
+       				          <div class="uk-section uk-section-small uk-position-bottom uk-overlay uk-overlay-primary">
+					          	<ul class="uk-subnav uk-subnav-pill uk-flex uk-flex-center" uk-switcher="connect: .karmanode-guide; animation: uk-animation-fade">
+						      		<li><a class="uk-border-pill" href="#" uk-switcher-item="Intro">Intro</a></li>
+						      		<li><a class="uk-border-pill" href="#" uk-switcher-item="Install">Prep</a></li>
+					          	</ul>
+				              </div>
+   							  <!-- end karmanode guide nav -->
+   							</div>
 						</div>
-						<!-- end karmanode guide -->
+						<!-- end karmanode guide desktop-->
 
 
 		<section class="uk-cover-container overlay-wrap">
@@ -392,5 +439,6 @@
 		<!-- JS FILES -->
 		<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
+		<script src="js/copy.js"></script>
 	</body>
 </html>

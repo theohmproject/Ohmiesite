@@ -1,4 +1,3 @@
-<script>
 function CopyToClipboard(id)
 {
 var r = document.createRange();
@@ -8,4 +7,3 @@ window.getSelection().addRange(r);
 document.execCommand('copy');
 window.getSelection().removeAllRanges();
 }
-</script>

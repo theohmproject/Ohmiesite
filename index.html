@@ -203,6 +203,7 @@
 						<!-- begin karmanode guide desktop-->
 						<div id="karmanode" class="uk-modal-full" uk-modal>
    						   <div class="uk-modal-dialog"><button class="uk-modal-close-default uk-close-large uk-icon-button" type="button" uk-close></button>
+        						<div>
         						<ul class="uk-switcher karmanode-guide">
         						 <li>
         						 <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
@@ -214,7 +215,7 @@
         								  <h4>Requirements</h4>
                						       <ul>
                						        <li>Password protected wallet with at least 3001 Ohmcoin available</li>
-               						        <li>Access to a Linux VPS such as one from <a href="https://www.vultr.com/?ref=7315147">Vultr</a>(Ubuntu 18 with 2GB or higher recommended)</li>
+               						        <li>Root access to a Linux VPS such as one from <a href="https://www.vultr.com/?ref=7315147">Vultr</a>(Ubuntu 18 with 2GB or higher recommended. 4GB Preferred)</li>
                						        <li> Access to a terminal or equivalent to ssh into your VPS.
                						        	<ul>
                						        		<li>*nix: Terminal, xTerm or equivalent</li>
@@ -227,33 +228,34 @@
        							 </div>
        							 </li>
        							 <li>
-       							 <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
-            						<div class="uk-background-cover" style="background-image: url('img/photo.jpg');" uk-height-viewport></div>
+       							 <div class="uk-width-1-1 uk-flex-middle" uk-height-viewport>
            							 <div class="uk-padding-large">
-               						 <h1>Karmnode Guide</h1>
-               						 <p>Staking Ohmcoin is not the only way to support the ohmcoin network, by setting up a karmanode you can earn rewards while helping process transactions.The following guide will help you get started</p>
-               						   <div>
-        								  <h4>Requirements</h4>
-               						       <ul>
-               						        <li>Password protected wallet with at least 3001 Ohmcoin available</li>
-               						        <li>Access to a Linux VPS such as one from <a href="https://www.vultr.com/?ref=7315147">Vultr</a>(Ubuntu 18 with 2GB or higher recommended)</li>
-               						        <li> Access to a terminal or equivalent to ssh into your VPS.
-               						        	<ul>
-               						        		<li>*nix: Terminal, xTerm or equivalent</li>
-               						        		<li>Mac: Terminal (found in /Applications/utilities)</li>
-               						        		<li>Windows: <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">Putty</a> or equivalent</li>
-               						        	</ul>
-               						       </ul>
-               						      </div>
-           							 </div>
-       							 </div></li>
-       							</ul>
+               						 <h1>VPS Preparation</h1>
+               						 <h4>Set up swap space(virtual memory)</h4>
 
+                                     <p><span id="swap" class="uk-margin-right uk-background-muted uk-padding-small">fallocate -l 6G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo -e "/swapfile none swap sw 0 0 \n" >> /etc/fstab</span><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('swap');return false;">Copy</a></p>
+
+
+                                     <h4>Set up firewall</h4>
+                                     <p><span id="firewall" class="uk-margin-right uk-background-muted uk-padding-small">ufw allow 22,52020</span><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('firewall');return false;">Copy</a></p>
+
+                                     <h4>Secure ssh from bruteforce attacks</h4>
+                                     <p><span id="fail2ban" class="uk-margin-right uk-background-muted uk-padding-small">apt install fail2ban && cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local && cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local && systemctl start fail2ban</span><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('fail2ban');return false;">Copy</a>
+                                     <br />More on <a href="https://linuxhandbook.com/fail2ban-basic">fail2ban</a></p>
+
+                                     <h4>Setup user(ohmcoin is an example, please use one you make up)</h4>
+                                     <p><span id="user" class="uk-margin-right uk-background-muted uk-padding-small">adduser -m ohmcoin </span><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('user');return false;">Copy</a></p>
+           							 </div>
+       							 </div>
+       							 </li>
+       							</ul>
+								</div>
        				          <!-- begin karmanode guide nav -->
-       				          <div class="uk-section uk-section-small uk-position-bottom uk-overlay uk-overlay-primary">
-					          	<ul class="uk-subnav uk-subnav-pill uk-flex uk-flex-center" uk-switcher="connect: .karmanode-guide; animation: uk-animation-fade">
-						      		<li><a class="uk-border-pill" href="#" uk-switcher-item="Intro">Intro</a></li>
-						      		<li><a class="uk-border-pill" href="#" uk-switcher-item="Install">Prep</a></li>
+       				          <div class="uk-position-bottom uk-position-fixed uk-dark uk-background-secondary">
+					          	<ul class="uk-subnav uk-subnav-pill uk-flex uk-flex-center uk-margin-top" uk-switcher="connect: .karmanode-guide; animation: uk-animation-fade">
+						      		<li><a class="uk-border-pill uk-button-primary" href="#" uk-switcher-item="Intro">Intro</a></li>
+						      		<li><a class="uk-border-pill uk-button-primary" href="#" uk-switcher-item="Install">Prep</a></li>
+						      		<li><a class="uk-border-pill uk-button-primary" href="#" uk-switcher-item="Install">Setup</a></li>
 					          	</ul>
 				              </div>
    							  <!-- end karmanode guide nav -->

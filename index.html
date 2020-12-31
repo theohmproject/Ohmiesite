@@ -178,6 +178,7 @@
    						   <div class="uk-modal-dialog"><button class="uk-modal-close-default uk-close-large uk-icon-button" type="button" uk-close></button>
         						<div>
         						<ul class="uk-switcher karmanode-guide">
+        						<!-- begin intro -->
         						 <li>
         						 <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
             						<div class="uk-background-cover" style="background-image: url('img/photo.jpg');" uk-height-viewport></div>
@@ -200,35 +201,46 @@
            							 </div>
        							 </div>
        							 </li>
+       							 <!-- end intro -->
+
+       							 <!-- begin prep -->
        							 <li>
        							 <div class="uk-width-1-1 uk-flex-middle" uk-height-viewport>
            							 <div class="uk-padding-large">
                						 <h1>VPS Preparation</h1>
                						 <h4>Set up swap space(virtual memory)</h4>
 
-                                     <p><span id="swap" class="uk-margin-right uk-background-muted uk-padding-small">fallocate -l 6G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo -e "/swapfile none swap sw 0 0 \n" >> /etc/fstab</span><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('swap');return false;">Copy</a></p>
+                                     <p><div id="swap" class="uk-margin-right uk-background-muted uk-padding-small">fallocate -l 6G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo -e "/swapfile none swap sw 0 0 \n" >> /etc/fstab</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('swap');return false;">Copy</a></p>
 
 
                                      <h4>Set up firewall</h4>
-                                     <p><span id="firewall" class="uk-margin-right uk-background-muted uk-padding-small">ufw allow 22,52020</span><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('firewall');return false;">Copy</a></p>
+                                     <p><div id="firewall" class="uk-margin-right uk-background-muted uk-padding-small">ufw allow 22,52020</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('firewall');return false;">Copy</a></p>
 
                                      <h4>Secure ssh from bruteforce attacks</h4>
-                                     <p><span id="fail2ban" class="uk-margin-right uk-background-muted uk-padding-small">apt install fail2ban && cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local && cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local && systemctl start fail2ban</span><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('fail2ban');return false;">Copy</a>
-                                     <br />More on <a href="https://linuxhandbook.com/fail2ban-basic">fail2ban</a></p>
+                                     <p><div id="fail2ban" class="uk-margin-right uk-background-muted uk-padding-small">apt install fail2ban && cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local && cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local && systemctl start fail2ban</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('fail2ban');return false;">Copy</a>
+                                     <br />More on <a target="_blank" href="https://linuxhandbook.com/fail2ban-basic">fail2ban</a></p>
 
                                      <h4>Setup user(ohmcoin is an example, please use one you make up)</h4>
-                                     <p><span id="user" class="uk-margin-right uk-background-muted uk-padding-small">adduser -m ohmcoin </span><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('user');return false;">Copy</a></p>
+                                     <p><div id="user" class="uk-margin-right uk-background-muted uk-padding-small">adduser -m ohmcoin </div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('user');return false;">Copy</a></p>
            							 </div>
        							 </div>
        							 </li>
+       							 <!-- end prep -->
+       							 <!-- begin karmanode setup -->
+       							 <div class="uk-width-1-1 uk-flex-middle" uk-height-viewport>
+           							 <div class="uk-padding-large">
+               						 <h1>Karmnode Setup</h1>
+               						 </div>
+               					 </div>
+       							 <!-- end karmanode setup -->
        							</ul>
 								</div>
        				          <!-- begin karmanode guide nav -->
        				          <div class="uk-position-bottom uk-position-fixed uk-dark uk-background-secondary">
 					          	<ul class="uk-subnav uk-subnav-pill uk-flex uk-flex-center uk-margin-top" uk-switcher="connect: .karmanode-guide; animation: uk-animation-fade">
-						      		<li><a class="uk-border-pill uk-button-primary" href="#" uk-switcher-item="Intro">Intro</a></li>
-						      		<li><a class="uk-border-pill uk-button-primary" href="#" uk-switcher-item="Install">Prep</a></li>
-						      		<li><a class="uk-border-pill uk-button-primary" href="#" uk-switcher-item="Install">Setup</a></li>
+						      		<li><a class="uk-border-pill uk-button-primary" href="#">Intro</a></li>
+						      		<li><a class="uk-border-pill uk-button-primary" href="#">Prep</a></li>
+						      		<li><a class="uk-border-pill uk-button-primary" href="#">Setup</a></li>
 					          	</ul>
 				              </div>
    							  <!-- end karmanode guide nav -->

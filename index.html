@@ -26,7 +26,6 @@
 		<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
-		<link rel="manifest" href="img/favicon/manifest.json">
 		<meta name="msapplication-TileColor" content="#ffffff">
 		<meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
 		<meta name="theme-color" content="#ffffff">
@@ -138,12 +137,12 @@
 
 			</div>
 		</section>
-		<section class="uk-section uk-section-secondary uk-section-large">
+		<section class="uk-section uk-section-secondary uk-preserve-color uk-section-large">
 			<div class="uk-container">
 				<div class="uk-child-width-1-2@l uk-flex-middle" uk-grid>
 					<div>
-						<h2 class="uk-margin-small-top uk-h1">Support Ohmcoin and Earn Rewards</h2>
-						<p class="subtitle-text">
+						<h2 class="uk-margin-small-top uk-h1 uk-text-muted">Support Ohmcoin and Earn Rewards</h2>
+						<p class="subtitle-text uk-text-muted">
 						Choose the following guides below to learn how to earn rewards through staking or by hosting a karmanode.
 						</p>
 						<div class="uk-width-2-2@l" uk-grid>
@@ -161,7 +160,7 @@
 						<!-- begin staking guide -->
 						<div id="staking" class="uk-modal-full" uk-modal>
    						 <div class="uk-modal-dialog">
-       						 <button class="uk-modal-close-default uk-close-large uk-icon-button" type="button" uk-close></button>
+       						 <button class="uk-modal-close-full uk-close-large uk-icon-button" type="button" uk-close></button>
         						<div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
            							 <div class="uk-padding-large">
                						 <h1>Staking Guide</h1>
@@ -177,20 +176,20 @@
 						<div id="karmanode" class="uk-modal-full" uk-modal>
    						   <div class="uk-modal-dialog"><button class="uk-modal-close-default uk-close-large uk-icon-button" type="button" uk-close></button>
         						<div>
-        						<ul class="uk-switcher karmanode-guide">
+        						<ul class="uk-switcher karmanode-guide" uk-height-viewport uk-overflow-auto>
         						<!-- begin intro -->
         						 <li>
         						 <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
             						<div class="uk-background-cover" style="background-image: url('img/photo.jpg');" uk-height-viewport></div>
            							 <div class="uk-padding-large">
                						 <h1>Karmnode Guide</h1>
-               						 <p>Staking Ohmcoin is not the only way to support the ohmcoin network, by setting up a karmanode you can earn rewards while helping process transactions.The following guide will help you get started</p>
+               						 <p>Staking Ohmcoin is not the only way to support the ohmcoin network, by setting up a karmanode you can earn rewards while helping process transactions. The following guide will help you get started</p>
                						   <div>
         								  <h4>Requirements</h4>
                						       <ul>
                						        <li>Password protected wallet with at least 3001 Ohmcoin available</li>
                						        <li>Root access to a Linux VPS such as one from <a href="https://www.vultr.com/?ref=7315147">Vultr</a>(Ubuntu 18 with 2GB or higher recommended. 4GB Preferred)</li>
-               						        <li> Access to a terminal or equivalent to ssh into your VPS.
+               						        <li> Access to a terminal or equivalent to ssh into your VPS via your own computer.
                						        	<ul>
                						        		<li>*nix: Terminal, xTerm or equivalent</li>
                						        		<li>Mac: Terminal (found in /Applications/utilities)</li>
@@ -208,34 +207,83 @@
        							 <div class="uk-width-1-1 uk-flex-middle" uk-height-viewport>
            							 <div class="uk-padding-large">
                						 <h1>VPS Setup and Security</h1>
+               						 <p>Using your computer use a terminal to log into your VPS root account via ssh<br />
+               						 example: ssh root@127.0.0.1 <br />
+               						 Note: the following can be copy and pasted into your terminal. Please pay close attention to notes in each section.
+               						 </p>
+
                						 <h4>Set up swap space(virtual memory)</h4>
 
-                                     <p><div id="swap" class="uk-margin-right uk-background-muted uk-padding-small">fallocate -l 4G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo -e "/swapfile none swap sw 0 0 \n" >> /etc/fstab</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('swap');return false;">Copy</a><br /> Note: Usually the rule is swapspace should be the same size as available ram. In this case it is assumed 4G of ram is available. <a href="https://www.thecodecity.com/2020/04/how-to-create-swap-file-in-ubuntu-1804.html" target="_blank">More Info</a></p>
+                                     <p><div id="swap" class="uk-margin-right uk-background-muted uk-padding-small">fallocate -l 4G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo -e "/swapfile none swap sw 0 0 \n" >> /etc/fstab</div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('swap');return false;">Copy</a><br /> Note: Usually the rule is swapspace should be the same size as available ram. In this case it is assumed 4G of ram is available. <a href="https://www.thecodecity.com/2020/04/how-to-create-swap-file-in-ubuntu-1804.html" target="_blank">More Info</a></p>
 
 
                                      <h4>Set up firewall</h4>
-                                     <p><div id="firewall" class="uk-margin-right uk-background-muted uk-padding-small">ufw allow 22 && ufw allow 52020 && ufw enable</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('firewall');return false;">Copy</a></p>
+                                     <p><div id="firewall" class="uk-margin-right uk-background-muted uk-padding-small">ufw allow 22 && ufw allow 52020 && ufw enable</div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('firewall');return false;">Copy</a></p>
 
                                      <h4>Secure ssh from bruteforce attacks</h4>
-                                     <p><div id="fail2ban" class="uk-margin-right uk-background-muted uk-padding-small">apt install -y fail2ban && cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local && cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local && systemctl start fail2ban</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('fail2ban');return false;">Copy</a>
+                                     <p><div id="fail2ban" class="uk-margin-right uk-background-muted uk-padding-small">apt install -y fail2ban && cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local && cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local && systemctl start fail2ban</div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('fail2ban');return false;">Copy</a>
                                      <br /><a href="https://linuxhandbook.com/fail2ban-basic" target="_blank">More info on fail2ban</a></p>
 
                                      <h4>Setup user(ohmcoin is an example, please use one you make up)</h4>
-                                     <p><div id="user" class="uk-margin-right uk-background-muted uk-padding-small">adduser ohmcoin</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('user');return false;">Copy</a><br />
+                                     <p><div id="user" class="uk-margin-right uk-background-muted uk-padding-small">adduser ohmcoin</div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('user');return false;">Copy</a><br />
                                      Enter a new strong password<br />
-                                     Note: Just entering the return key for the user information questions is fine and no information is required. Advanced users: It is not recommended to give the new user sudo permissions, do so at your own risk.
+                                     Note: Entering the return key for the user information questions is fine and no information is required. Advanced users: It is not recommended to add the newly created user to the sudoers group, do so at your own risk.
                                      </p>
            							 <h4>Install Prerequisites for Karmanode Install</h4>
                                      <p>
-                                     <div id="user" class="uk-margin-right uk-background-muted uk-padding-small">apt install -y wget unzip</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('user');return false;">Copy</a></p>
+                                     <div id="user" class="uk-margin-right uk-background-muted uk-padding-small">apt install -y wget unzip</div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('user');return false;">Copy</a></p><br />
+                                     <div class="uk-margin-bottom">Note: Do not close terminal</div>
+                                     </div>
                                      </div>
        							 </li>
        							 <!-- end prep -->
        							 <!-- begin karmanode setup -->
-       							 <li>
+                                 <li>
        							 <div class="uk-width-1-1 uk-flex-middle" uk-height-viewport>
            							 <div class="uk-padding-large">
                						 <h1>Karmnode Setup</h1>
+               						 <h4>Create Karmanode Address and Send Funds</h4>
+                                     <div>Using your wallet on your computer, click on the "Receive" tab located on the left side of the wallet window.</div>
+                                     <div>Enter a name in the text field to the right of the text "Label" and then click on the "Request Payment" button.</div>
+                                     <div>Copy the newly created wallet address using the "Copy Address" button or highlighting and copying it manually.</div>
+                                     <div>Navigate to the Send page by clicking the "Send" tab located on the left side of the wallet window.</div>
+                                     <div>Paste your newly created wallet address into the address text field to the right of the text "Pay To"</div>
+                                     <div>Enter 3000 OHMC in the text field to the right of the text "Amount" and click "Send" found at the bottom of the wallet.</div>
+                                     <div>If your wallet was locked enter your password</div>
+
+               						 <h4>Download and Install Ohmcoin Daemon</h4>
+                                     <p><div id="install" class="uk-margin-right uk-background-muted uk-padding-small">wget https://github.com/theohmproject/ohmcoin/releases/download/3.0.3.1/ohmcoin-3.0.3.1-x86_64-linux-gnu.tar.gz && tar -xvzf ohmcoin-3.0.3.1-x86_64-linux-gnu.tar.gz && mv ohmcoin*-cli ohmcoin-tx ohmcoind /usr/local/bin && rm -rf ohmcoin* </div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('install');return false;">Copy</a></p>
+                                     <h4>Login Into Perviously Made User(ohmcoin is our example please use the one use made up)</h4>
+                                     <p><div id="login" class="uk-margin-right uk-background-muted uk-padding-small">su ohmcoin</div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('login');return false;">Copy</a></p>
+
+               						 <h4>Create .ohmc Directory and ohmc.conf</h4>
+                                     <p><div id="conf" class="uk-margin-right uk-background-muted uk-padding-small"> cd && mkdir .ohmc && touch .ohmc/ohmc.conf </div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('conf');return false;">Copy</a></p>
+
+               						 <h4>Download and Install Snapshot/Bootstrap(optional)</h4>
+                                     <p><div id="snapshot" class="uk-margin-right uk-background-muted uk-padding-small">wget https://www.ohmcoin.org/downloads/snapshot.zip && unzip snapshot.zip && mv snapshot/blocks snashot/chainstate peers.dat .ohmc/</div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('snapshot');return false;">Copy</a></p>
+
+                                     <h4>Add Settings to ohmc.conf(Almost Done!!!)</h4>
+                                     <p><div id="nano" class="uk-margin-right uk-background-muted uk-padding-small">nano .ohmc/ohmc.conf </div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('nano');return false;">Copy</a></p>
+
+                                     <p><div id="edit" class="uk-margin-right uk-background-muted uk-padding-small">
+                                     <pre>
+rpcallowip=127.0.0.1
+server=1
+listen=1
+daemon=1
+externalip=your-vps-ip-address:52020
+logtimestamps=1
+txindex=1
+maxconnections=128
+karmanode=1
+karmanodeprivkey=add-privkey-here
+                                     </pre>
+                                     </div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('edit');return false;">Copy</a></p>
+
+                                     <h4>Start Ohmcoin</h4>
+                                     <p><div id="start" class="uk-margin-right uk-background-muted uk-padding-small">ohmcoind -daemon</div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('start');return false;">Copy</a></p>
+
+
                						 </div>
                					 </div>
                					 </li>

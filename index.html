@@ -214,7 +214,7 @@
 
 
                                      <h4>Set up firewall</h4>
-                                     <p><div id="firewall" class="uk-margin-right uk-background-muted uk-padding-small">ufw allow 22,52020</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('firewall');return false;">Copy</a></p>
+                                     <p><div id="firewall" class="uk-margin-right uk-background-muted uk-padding-small">ufw allow 22 && ufw allow 52020</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('firewall');return false;">Copy</a></p>
 
                                      <h4>Secure ssh from bruteforce attacks</h4>
                                      <p><div id="fail2ban" class="uk-margin-right uk-background-muted uk-padding-small">apt install fail2ban && cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local && cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local && systemctl start fail2ban</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('fail2ban');return false;">Copy</a>

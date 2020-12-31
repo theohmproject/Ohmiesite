@@ -207,7 +207,7 @@
        							 <li>
        							 <div class="uk-width-1-1 uk-flex-middle" uk-height-viewport>
            							 <div class="uk-padding-large">
-               						 <h1>VPS Security</h1>
+               						 <h1>VPS Setup and Security</h1>
                						 <h4>Set up swap space(virtual memory)</h4>
 
                                      <p><div id="swap" class="uk-margin-right uk-background-muted uk-padding-small">fallocate -l 4G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo -e "/swapfile none swap sw 0 0 \n" >> /etc/fstab</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('swap');return false;">Copy</a><br /> Note: Usually the rule is swapspace should be the same size as available ram. In this case it is assumed 4G of ram is available. <a href="https://www.thecodecity.com/2020/04/how-to-create-swap-file-in-ubuntu-1804.html" target="_blank">More Info</a></p>
@@ -217,23 +217,30 @@
                                      <p><div id="firewall" class="uk-margin-right uk-background-muted uk-padding-small">ufw allow 22 && ufw allow 52020 && ufw enable</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('firewall');return false;">Copy</a></p>
 
                                      <h4>Secure ssh from bruteforce attacks</h4>
-                                     <p><div id="fail2ban" class="uk-margin-right uk-background-muted uk-padding-small">apt install fail2ban && cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local && cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local && systemctl start fail2ban</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('fail2ban');return false;">Copy</a>
+                                     <p><div id="fail2ban" class="uk-margin-right uk-background-muted uk-padding-small">apt install -y fail2ban && cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local && cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local && systemctl start fail2ban</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('fail2ban');return false;">Copy</a>
                                      <br /><a href="https://linuxhandbook.com/fail2ban-basic" target="_blank">More info on fail2ban</a></p>
 
                                      <h4>Setup user(ohmcoin is an example, please use one you make up)</h4>
-                                     <p><div id="user" class="uk-margin-right uk-background-muted uk-padding-small">adduser -m ohmcoin </div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('user');return false;">Copy</a></p>
-           							 </div>
-       							 </div>
+                                     <p><div id="user" class="uk-margin-right uk-background-muted uk-padding-small">adduser ohmcoin</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('user');return false;">Copy</a><br />
+                                     Enter a new strong password<br />
+                                     Note: Just entering the return key for the user information questions is fine and no information is required. Advanced users: It is not recommended to give the new user sudo permissions, do so at your own risk.
+                                     </p>
+           							 <h4>Install Prerequisites for Karmanode Install</h4>
+                                     <p>
+                                     <div id="user" class="uk-margin-right uk-background-muted uk-padding-small">apt install -y wget unzip</div><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('user');return false;">Copy</a></p>
+                                     </div>
        							 </li>
        							 <!-- end prep -->
        							 <!-- begin karmanode setup -->
+       							 <li>
        							 <div class="uk-width-1-1 uk-flex-middle" uk-height-viewport>
            							 <div class="uk-padding-large">
                						 <h1>Karmnode Setup</h1>
                						 </div>
                					 </div>
-       							 <!-- end karmanode setup -->
-       							</ul>
+               					 </li>
+     							 <!-- end karmanode setup -->
+       							 </ul>
 								</div>
        				          <!-- begin karmanode guide nav -->
        				          <div class="uk-position-bottom uk-position-fixed uk-dark uk-background-secondary">

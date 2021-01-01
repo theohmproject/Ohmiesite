@@ -71,8 +71,30 @@ animation:octocat-wave 560ms ease-in-out
 }
 
 
+/* Grow */
+.ohm-grow {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
 
+.ohm-grow:hover,
+.ohm-grow:focus,
+.ohm-grow:active {
+    transform: scale(1.3);
+}
 
+/* Glow */
+.ohm-glow img
+{
+box-shadow: 0 5px 5px -5px #ccc;
+padding-bottom: 3px;
+}
 
 
 

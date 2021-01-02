@@ -51,3 +51,10 @@
   ExpiresByType image/x-icon "access plus 1 year"
   ExpiresByType application/pdf "access plus 1 month"
 </IfModule>
+
+RedirectMatch 404 /\.git
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ /index.html [L]

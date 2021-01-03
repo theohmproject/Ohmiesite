@@ -36,11 +36,11 @@
 	</head>
 	<body>
 
-<!-- begin fork me on github -->
+<!-- begin fork me on github
 <div class="uk-visible@s" uk-sticky>
 <a href="https://github.com/theohmproject/ohmcoin/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#fff; color:#151513; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 </div>
-<!-- end fork me on github -->
+ end fork me on github -->
 
 		<!-- TOP -->
 		<div class="top-wrap uk-position-relative uk-background-secondary">
@@ -240,16 +240,20 @@
        							 <!-- begin karmanode setup -->
                                  <li>
        							 <div class="uk-width-1-1 uk-flex-middle" uk-height-viewport>
-           							 <div class="uk-padding-large">
+           							 <div id="knsetup" class="uk-padding-large">
                						 <h1>Karmnode Setup</h1>
                						 <h4>Create Karmanode Address and Send Funds</h4>
                                      <div>Using your wallet on your computer, click on the "Receive" tab located on the left side of the wallet window.</div>
-                                     <div>Enter a name in the text field to the right of the text "Label" and then click on the "Request Payment" button.</div>
-                                     <div>Copy the newly created wallet address using the "Copy Address" button or highlighting and copying it manually.</div>
-                                     <div>Navigate to the Send page by clicking the "Send" tab located on the left side of the wallet window.</div>
-                                     <div>Paste your newly created wallet address into the address text field to the right of the text "Pay To"</div>
-                                     <div>Enter 3000 OHMC in the text field to the right of the text "Amount" and click "Send" found at the bottom of the wallet.</div>
-                                     <div>If your wallet was locked enter your password</div>
+                                     <div class="uk-margin-bottom">Enter a name in the text field to the right of the text "Label" and then click on the "Request Payment" button.</div>
+                                     <div><img src="img/karmanode/karmanode-create-address.jpg" /></div>
+                                     <div class="uk-margin">Copy the newly created wallet address using the "Copy Address" button or highlighting and copying it manually.</div>
+                                     <div><img src="img/karmanode/karmanode-create-address-copy.jpg" /></div>
+                                     <div class="uk-margin">Navigate to the Send page by clicking the "Send" tab located on the left side of the wallet window.</div>
+                                     <div class="uk-margin">Paste your newly created wallet address into the address text field to the right of the text "Pay To"</div>
+                                     <div class="uk-margin">Enter 3000 OHMC in the text field to the right of the text "Amount" and click "Send" found at the bottom left of the wallet.</div>
+                                     <div><img src="img/karmanode/karmanode-send.jpg" /></div>
+                                     <div class="uk-margin">If prompted for a password enter your password and click ok</div>
+                                     <div><img src="img/karmanode/karmanode-send-unlock.jpg" /></div>
 
                						 <h4>Download and Install Ohmcoin Daemon</h4>
                                      <p><div id="install" class="uk-margin-right uk-background-muted uk-padding-small">wget https://github.com/theohmproject/ohmcoin/releases/download/3.0.3.1/ohmcoin-3.0.3.1-x86_64-linux-gnu.tar.gz && tar -xvzf ohmcoin-3.0.3.1-x86_64-linux-gnu.tar.gz && mv ohmcoin*-cli ohmcoin-tx ohmcoind /usr/local/bin && rm -rf ohmcoin* </div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('install');return false;">Copy</a></p>
@@ -262,7 +266,7 @@
                						 <h4>Download and Install Snapshot/Bootstrap(optional)</h4>
                                      <p><div id="snapshot" class="uk-margin-right uk-background-muted uk-padding-small">wget https://www.ohmcoin.org/downloads/snapshot.zip && unzip snapshot.zip && mv blocks chainstate peers.dat .ohmc/ && rm -rf snapshot.zip readme.txt</div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('snapshot');return false;">Copy</a></p>
 
-                                     <h4>Add Settings to ohmc.conf(Almost Done!!!)</h4>
+                                     <h4>Add Settings to ohmc.conf</h4>
                                      <p><div id="nano" class="uk-margin-right uk-background-muted uk-padding-small">nano .ohmc/ohmc.conf </div><br /><a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('nano');return false;">Copy</a></p>
 
                                      <p><div id="edit" class="uk-margin-right uk-background-muted uk-padding-small">
@@ -295,7 +299,7 @@ karmanodeprivkey=add-privkey-here
 					          	<ul class="uk-subnav uk-subnav-pill uk-flex uk-flex-center uk-margin-top" uk-switcher="connect: .karmanode-guide; animation: uk-animation-fade">
 						      		<li><a class="uk-border-pill uk-button-primary" href="#">Intro</a></li>
 						      		<li><a class="uk-border-pill uk-button-primary" href="#">Prep</a></li>
-						      		<li><a class="uk-border-pill uk-button-primary" href="#">Setup</a></li>
+						      		<li><a class="uk-border-pill uk-button-primary" href="#knsetup">Setup</a></li>
 					          	</ul>
 				              </div>
    							  <!-- end karmanode guide nav -->
@@ -304,7 +308,7 @@ karmanodeprivkey=add-privkey-here
 						<!-- end karmanode guide desktop-->
 
 
-		<section class="uk-cover-container overlay-wrap">
+		<section id="download" class="uk-cover-container overlay-wrap">
 			<img src="img/wallet-bg.jpg" alt="" uk-cover uk-img/>
 
 			<div class="uk-container uk-position-z-index uk-position-relative uk-section uk-section-large uk-light uk-padding-remove">
@@ -408,7 +412,7 @@ karmanodeprivkey=add-privkey-here
 				</div>
 			</div>
 		</div>
-		<!-- /LOGOS -->
+		<!-- LOGOS -->
 		<!-- FOOTER -->
 		<footer class="uk-section uk-section-secondary uk-padding-remove-bottom">
 			<div class="uk-container">

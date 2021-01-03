@@ -55,9 +55,9 @@
                 <a href="#team">Team</a>
               </li>
               <li>
-                <a href="//explore.ohmcoin.org" target="blank">Explore</a>
+                <a href="http://explore.ohmcoin.org" target="blank">Explore</a>
               </li>
-            </ul><a class="uk-navbar-toggle uk-navbar-item uk-hidden@s" uk-toggle="" uk-navbar-toggle-icon="" href="#offcanvas-nav"></a>
+            </ul><a class="uk-navbar-toggle uk-navbar-item uk-hidden@s" uk-toggle uk-navbar-toggle-icon href="#offcanvas-nav"></a>
           </div>
         </nav>
       </div>
@@ -262,9 +262,9 @@
             </div>
           </li><!-- end send collateral -->
           <!-- begin daemon setup and kn start -->
-          <li>
+          <li id="knsetup">
             <div class="uk-width-1-1 uk-flex-middle" uk-height-viewport="">
-              <div id="knsetup" class="uk-padding-large">
+              <div class="uk-padding-large">
                 <h1>Ohmcoin Daemon and Karmanode Start Up</h1>
                 <h4>Download and Install Ohmcoin Daemon</h4>
                 <div id="install" class="uk-margin-right uk-background-muted uk-padding-small">
@@ -355,10 +355,10 @@ karmanodeprivkey=paste-privkey-here
             <a class="uk-border-pill uk-button-primary" href="#">Prep</a>
           </li>
           <li>
-            <a class="uk-border-pill uk-button-primary" href="#send">Send Ohmcoin</a>
+            <a class="uk-border-pill uk-button-primary" href="#send" uk-scroll>Send Ohmcoin</a>
           </li>
           <li>
-            <a class="uk-border-pill uk-button-primary" href="#knsetup">Karmanode</a>
+            <a class="uk-border-pill uk-button-primary" href="#knsetup" uk-scroll>Karmanode</a>
           </li>
         </ul>
       </div><!-- end karmanode guide nav -->

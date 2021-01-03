@@ -80,7 +80,7 @@
             <div><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/teaser/discover.svg" alt="" uk-img=""></div>
             <div uk-scrollspy-class="uk-animation-slide-right-medium">
               <h6 class="uk-text-primary">Decentralized Crowdfunding</h6>
-              <h2 class="uk-margin-small-top">To often, technology has been used to suppress many freedoms, one of these freedoms is fundraising</h2>
+              <h2 class="uk-margin-small-top">Too often technology has been used to suppress many freedoms, one of these freedoms is fundraising</h2>
               <p class="subtitle-text">Beyond our current utility which is similar to other cryptocurrencies, we are developing a system of smart contracts and functions to facilitate a decentralized and independant crowdfunding system that does not sensor, allows for a network vote on campaign acceptance and does not take a percentage of any crowdfunded donations.</p>
             </div>
           </div>
@@ -257,13 +257,12 @@
                 <div><img src="img/karmanode/karmanode-send-unlock.jpg"></div>
               </div>
             </div>
-          </li>
-          <!-- end send collateral -->
+          </li><!-- end send collateral -->
           <!-- begin daemon setup and kn start -->
           <li>
             <div class="uk-width-1-1 uk-flex-middle" uk-height-viewport="">
               <div id="knsetup" class="uk-padding-large">
-                <h1>Ohmcoin Daemon and Karmanode Start</h1>
+                <h1>Ohmcoin Daemon and Karmanode Start Up</h1>
                 <h4>Download and Install Ohmcoin Daemon</h4>
                 <div id="install" class="uk-margin-right uk-background-muted uk-padding-small">
                   wget https://github.com/theohmproject/ohmcoin/releases/download/3.0.3.1/ohmcoin-3.0.3.1-x86_64-linux-gnu.tar.gz &amp;& tar -xvzf ohmcoin-3.0.3.1-x86_64-linux-gnu.tar.gz &amp;& mv ohmcoin*-cli ohmcoin-tx ohmcoind /usr/local/bin &amp;& rm -rf ohmcoin*
@@ -285,16 +284,32 @@
                 </div><br>
                 <a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('snapshot');return false;">Copy</a>
                 <h4>Setup Karmanode Settings</h4>
-                <div id="snapshot" class="uk-margin-right uk-background-muted uk-padding-small">
-                  wget https://www.ohmcoin.org/downloads/snapshot.zip &amp;& unzip snapshot.zip &amp;& mv blocks chainstate peers.dat .ohmc/ &amp;& rm -rf snapshot.zip readme.txt
-                </div><br>
+                <div class="uk-padding-small">
+                  <div  class="uk-margin-bottom">By now the funds you sent have confirmed, so now you can create the needed karmanode settings. Using the wallet on your computer click on the "Karmanode" tab on the left side, then click on "Add Karmanode" on the bottom left.</div>
+                  <img src="img/karmanode/karmanode-add.jpg"/>
+                </div>
+                <div class="uk-padding-small">
+                  <div  class="uk-margin-bottom">Enter a name for your karmanode and the ip address of your VPS with port 52020 at the end</div>
+                  <img src="img/karmanode/karmanode-ipaddress.jpg"/>
+                </div>
+                <div class="uk-padding-small">
+                  <div  class="uk-margin-bottom">Click on "Autofill PRIVKEY" and make sure to copy the privkey to finish setting up your ohmcoin daemon.</div>
+                  <img src="img/karmanode/karmanode-privkey-generate.jpg"/>
+                </div>
+                <div class="uk-padding-small">
+                  <div  class="uk-margin-bottom">Click on "Autofill OUTPUTS" then click "OK" on the bottom right</div>
+                  <img src="img/karmanode/karmanode-output.jpg"/>
+                </div>
                 <h4>Add Settings to ohmc.conf</h4>
+                <div>Now in your terminal we will add the needed settings to enable the karmnode on your VPS.</div>
                 <div id="nano" class="uk-margin-right uk-background-muted uk-padding-small">
                   nano .ohmc/ohmc.conf
                 </div><br>
                 <a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('nano');return false;">Copy</a>
-                <div id="edit" class="uk-margin-right uk-background-muted uk-padding-small">
-                  <pre>
+
+                <div class="uk-margin-right uk-margin-top uk-background-muted uk-padding-small">
+                <div>Note: Make sure to paste your privkey that you created during the "Autofill PRIVKEY" step above and add your VPS ip address. (You may add them in the text are below and copy them over to your terminal.)</div>
+                  <textarea class="uk-textarea uk-width-1-2 uk-height-medium" id="edit">
 rpcallowip=127.0.0.1
 server=1
 listen=1
@@ -304,15 +319,25 @@ logtimestamps=1
 txindex=1
 maxconnections=128
 karmanode=1
-karmanodeprivkey=add-privkey-here
-                                     </pre>
+karmanodeprivkey=paste-privkey-here
+                  </textarea>
                 </div><br>
                 <a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('edit');return false;">Copy</a>
+                <div>After you finish entering the above information you will need to save the file by using the key command control - o(ie press the control key and the letter O key at the same time), press the return key and then enter the command key control - x(ie press the control key and the letter X at the same time)</div>
                 <h4>Start Ohmcoin</h4>
+                <div>The following will start your ohmcoin daemon</div>
                 <div id="start" class="uk-margin-right uk-background-muted uk-padding-small">
                   ohmcoind -daemon
                 </div><br>
                 <a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('start');return false;">Copy</a>
+                <div>If you installed the snapshot, now is a good time to eat your sandwich, otherwise it will take several hours for your node to sync. The following command will show you the progress of your sync.</div>
+                <div id="info" class="uk-margin-right uk-background-muted uk-padding-small">
+                  ohmcoin-cli getinfo
+                </div><br>
+                <a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('info');return false;">Copy</a>
+                <h4>Start your karmanode</h4>
+                <div>Once your ohmcoin daemon is synced, you may start it with your wallet. Navigate to the karmnode tab in your wallet right click on your karmanode and select "start alias".</div>
+                <img src="img/karmanode/karmanode-start-alias.jpg"><br>
               </div>
             </div>
           </li><!-- end karmanode setup -->
@@ -379,6 +404,7 @@ karmanodeprivkey=add-privkey-here
   <div id="exchange" class="uk-margin-bottom uk-width-1-1">
     &nbsp;
   </div>
+  <!-- Begin Exchanges and Partners-->
   <section class="uk-section uk-section-default uk-flex uk-flex-center uk-width-1-1">
     <ul class="uk-width-2-2 uk-flex uk-flex-center" uk-grid="">
       <li class="uk-flex uk-flex-center uk-width-1-2">
@@ -421,7 +447,7 @@ karmanodeprivkey=add-privkey-here
         </ul>
       </li>
     </ul>
-  </section><!-- BOTTOM -->
+  </section><!-- End Exchanges and Partners-->
   <!-- LOGOS -->
   <div class="uk-section uk-section-small uk-section-muted">
     <div class="uk-container uk-container-small">
@@ -462,7 +488,7 @@ karmanodeprivkey=add-privkey-here
                                                         document.write("<a href='mailto:"+link+"'><img alt='Contact' border='0' src='img/social/email.png'/><\/a>")
                                                         }
                                                         //-->
-          </script><noscript>Sorry, you need Javascript on to email me.</noscript>
+          </script><noscript>Sorry, you need to have Javascript enabled to email us.</noscript>
         </div>
       </div>
     </div>

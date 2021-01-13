@@ -77,7 +77,7 @@
   </div><!-- TOP -->
   <section id="content" class="uk-section uk-section-default">
     <div class="uk-container">
-      <ul class="uk-switcher uk-margin">
+      <ul class="uk-margin">
         <li>
           <div class="uk-child-width-1-2@l uk-flex-middle" uk-grid="" uk-scrollspy="target: &gt; div; cls: uk-animation-slide-left-medium">
             <div><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/teaser/discover.svg" alt="" uk-img=""></div>
@@ -147,18 +147,16 @@
           <h1>Staking Guide</h1>
           <p>Simple Guild on how to stake</p>
         </div>
-        <div class="uk-background-cover" style="background-image: url('img/photo.jpg');" uk-height-viewport=""></div>
+        <div class="uk-background-cover" style="background-image: url('img/photo.jpg');" uk-height-viewport></div>
       </div>
     </div>
   </div><!-- end staking guide -->
   <!-- begin karmanode guide desktop-->
   <div id="karmanode" class="uk-modal-full" uk-modal="">
    	 <div class="uk-modal-dialog"><button class="uk-modal-close-default uk-close-large uk-icon-button" type="button" uk-close></button>
-      <div>
-        <ul class="uk-switcher karmanode-guide" uk-height-viewport="" uk-overflow-auto="">
+        <div class="karmanode-guide" uk-height-viewport uk-overflow-auto>
           <!-- begin intro -->
-          <li>
-            <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid="">
+            <div id="intro" class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
               <div class="uk-background-contain uk-height-medium" style="background-image: url('img/karmanode/karmanode-knot.png');" uk-height-viewport="offset-top: 20;offset-bottom: 20;"></div>
               <div class="uk-padding-large">
                 <h1>Karmnode Guide</h1>
@@ -182,11 +180,9 @@
                   </ul>
                 </div>
               </div>
-            </div>
-          </li><!-- end intro -->
+            </div><!-- end intro -->
           <!-- begin prep -->
-          <li>
-            <div class="uk-width-1-1 uk-flex-middle" uk-height-viewport="">
+            <div id="prep" class="uk-width-1-1 uk-flex-middle" uk-height-viewport>
               <div class="uk-padding-large">
                 <h1>VPS Setup and Security</h1>
                 <p>Using your computer use a terminal to log into your VPS root account via ssh<br>
@@ -225,11 +221,9 @@
                   Note: Do not close terminal
                 </div>
               </div>
-            </div>
-          </li><!-- end prep -->
+            </div><!-- end prep -->
           <!-- begin send collateral setup -->
-          <li>
-            <div class="uk-width-1-1 uk-flex-middle" uk-height-viewport="">
+            <div class="uk-width-1-1 uk-flex-middle" uk-height-viewport>
               <div id="send" class="uk-padding-large">
                 <h1>Send Collateral</h1>
                 <h4>Create Karmanode Address and Send Funds</h4>
@@ -259,11 +253,9 @@
                 </div>
                 <div><img src="img/karmanode/karmanode-send-unlock.jpg"></div>
               </div>
-            </div>
-          </li><!-- end send collateral -->
+            </div><!-- end send collateral -->
           <!-- begin daemon setup and kn start -->
-          <li id="knsetup">
-            <div class="uk-width-1-1 uk-flex-middle" uk-height-viewport="">
+            <div id="knsetup" class="uk-width-1-1 uk-flex-middle">
               <div class="uk-padding-large">
                 <h1>Ohmcoin Daemon and Karmanode Start Up</h1>
                 <h4>Download and Install Ohmcoin Daemon</h4>
@@ -292,15 +284,15 @@
                   <img src="img/karmanode/karmanode-add.jpg"/>
                 </div>
                 <div class="uk-padding-small">
-                  <div  class="uk-margin-bottom">Enter a name for your karmanode and the ip address of your VPS with port 52020 at the end</div>
+                  <div class="uk-margin-bottom">Enter a name for your karmanode and the ip address of your VPS with port 52020 at the end</div>
                   <img src="img/karmanode/karmanode-ipaddress.jpg"/>
                 </div>
                 <div class="uk-padding-small">
-                  <div  class="uk-margin-bottom">Click on "Autofill PRIVKEY" and make sure to copy the privkey to finish setting up your ohmcoin daemon.</div>
+                  <div class="uk-margin-bottom">Click on "Autofill PRIVKEY" and make sure to copy the privkey to finish setting up your ohmcoin daemon.</div>
                   <img src="img/karmanode/karmanode-privkey-generate.jpg"/>
                 </div>
                 <div class="uk-padding-small">
-                  <div  class="uk-margin-bottom">Click on "Autofill OUTPUTS" then click "OK" on the bottom right</div>
+                  <div class="uk-margin-bottom">Click on "Autofill OUTPUTS" then click "OK" on the bottom right</div>
                   <img src="img/karmanode/karmanode-output.jpg"/>
                 </div>
                 <h4>Add Settings to ohmc.conf</h4>
@@ -340,19 +332,20 @@ karmanodeprivkey=paste-privkey-here
                 <a href="#" class="uk-button uk-button-primary uk-button-small uk-border-pill" onclick="CopyToClipboard('info');return false;">Copy</a>
                 <h4>Start your karmanode</h4>
                 <div>Once your ohmcoin daemon is synced, you may start it with your wallet. Navigate to the karmnode tab in your wallet right click on your karmanode and select "start alias".</div>
-                <img src="img/karmanode/karmanode-start-alias.jpg"><br>
+                <img class="uk-margin-bottom" src="img/karmanode/karmanode-start-alias.jpg"><br>
+                <div class="uk-margin-large-bottom">After a while(several hours) you should begin to receive your karmanode rewards. ENJOY!!!<br>
+                If you have any issues please contact us on our <a href="https://discord.gg/FvDfVg4JeH">discord</a> for help</div>
               </div>
-            </div>
-          </li><!-- end karmanode setup -->
-        </ul>
-      </div><!-- begin karmanode guide nav -->
+            </div><!-- end karmanode setup -->
+      </div>
+      <!-- begin karmanode guide nav -->
       <div class="uk-position-bottom uk-position-fixed uk-dark uk-background-secondary">
-        <ul class="uk-subnav uk-subnav-pill uk-flex uk-flex-center uk-margin-top" uk-switcher="connect: .karmanode-guide; animation: uk-animation-fade">
+        <ul class="uk-subnav uk-subnav-pill uk-flex uk-flex-center uk-margin-top">
           <li>
-            <a class="uk-border-pill uk-button-primary" href="#">Intro</a>
+            <a class="uk-border-pill uk-button-primary" href="#intro" uk-scroll>Intro</a>
           </li>
           <li>
-            <a class="uk-border-pill uk-button-primary" href="#">Prep</a>
+            <a class="uk-border-pill uk-button-primary" href="#prep" uk-scroll>Prep</a>
           </li>
           <li>
             <a class="uk-border-pill uk-button-primary" href="#send" uk-scroll>Send Ohmcoin</a>
@@ -361,7 +354,8 @@ karmanodeprivkey=paste-privkey-here
             <a class="uk-border-pill uk-button-primary" href="#knsetup" uk-scroll>Karmanode</a>
           </li>
         </ul>
-      </div><!-- end karmanode guide nav -->
+      </div>
+      <!-- end karmanode guide nav -->
     </div>
   </div><!-- end karmanode guide desktop-->
   <section id="download" class="uk-cover-container overlay-wrap">

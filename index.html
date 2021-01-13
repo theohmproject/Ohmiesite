@@ -79,7 +79,7 @@
     <div class="uk-container">
       <ul class="uk-switcher uk-margin">
         <li>
-          <div class="uk-child-width-1-2@l uk-flex-middle" uk-grid="" uk-scrollspy="target: &gt; div; cls: uk-animation-slide-left-medium">
+          <div class="uk-child-width-1-2@l uk-flex-middle" uk-grid uk-scrollspy="target: &gt; div; cls: uk-animation-slide-left-medium">
             <div><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/teaser/discover.svg" alt="" uk-img=""></div>
             <div uk-scrollspy-class="uk-animation-slide-right-medium">
               <h6 class="uk-text-primary">Decentralized Crowdfunding</h6>
@@ -95,7 +95,7 @@
               <h6 class="uk-text-primary">Crowdfunding Freedom</h6>
               <h2 class="uk-margin-small-top">No Central Authority Through a Community Vote</h2>
               <p class="subtitle-text">Currently all crowdfunding sites control what campaigns are allowed to be on their sites. They choose the winners and losers, allowing for a centralized abuse of power. Our in development system removes this corruption and places that power in our community of karmanode holders.</p>
-              <div class="uk-child-width-1-2@s" uk-grid="">
+              <div class="uk-child-width-1-2@s" uk-grid>
                 <div>
                   <h4>Karmanodes</h4>
                   <p>As the development team upgrades ohmcoins utility, karmanodes will slowly become the backbone of the ohmcoin network decentralized services, such as decentralized crowdfunding website and voting on crowdfunding requests.</p>
@@ -123,11 +123,11 @@
   </section>
   <section id="earn" class="uk-section uk-section-secondary uk-preserve-color uk-section-large">
     <div class="uk-container">
-      <div class="uk-child-width-1-2@l uk-flex-middle" uk-grid="">
+      <div class="uk-child-width-1-2@l uk-flex-middle" uk-grid>
         <div>
           <h2 class="uk-margin-small-top uk-h1 uk-text-muted">Support Ohmcoin and Earn Rewards</h2>
           <p class="subtitle-text uk-text-muted">Choose the following guides below to learn how to earn rewards through staking or by hosting a karmanode.</p>
-          <div class="uk-width-2-2@l" uk-grid="">
+          <div class="uk-width-2-2@l" uk-grid>
             <div class="">
               <a class="uk-button uk-button-primary uk-border-pill" href="#staking" uk-toggle="">Staking</a>
             </div>
@@ -136,26 +136,47 @@
             </div>
           </div>
         </div>
-        <div uk-scrollspy="cls: uk-animation-fade"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/marketing-2.svg" uk-img="" alt="Image"></div>
+        <div uk-scrollspy="cls: uk-animation-fade"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/marketing-2.svg" uk-img alt="Image"></div>
       </div>
     </div>
   </section><!-- begin staking guide -->
   <div id="staking" class="uk-modal-full" uk-modal="">
-    <div class="uk-modal-dialog">
-      <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid="">
+    <div class="uk-modal-dialog"><button class="uk-modal-close-default uk-close-large uk-icon-button" type="button" uk-close></button>
+      <div class="uk-grid-collapse uk-child-width-1-2@m uk-flex-middle" uk-grid>
+        <div class="uk-background-cover" style="background-image: url('img/stake/stake.png');" uk-height-viewport="offset-top: 20;offset-bottom: 20;"></div>
         <div class="uk-padding-large">
           <h1>Staking Guide</h1>
           <div>Staking is the simplest way to earn ohmcoin, the following guide will help you get started.</div>
           <div>
            <h4>Requirements</h4>
             <ul>
-            <li>Internet connection</li>
+            <li>Constant on internet connection</li>
             <li>A computer that you can leave on with 8GB of ram or higher to allow for system services and other applications</li>
-            <li>A wallet with ohmcoin available</li>
+            <li>A wallet with ohmcoin available that is encrypted</li>
             </ul>
           </div>
         </div>
-        <div class="uk-background-cover" style="background-image: url('img/photo.jpg');" uk-height-viewport></div>
+      </div>
+      <div>
+      <div class="uk-padding-small">
+       <div class="uk-margin-bottom">On the bottom right of the wallet window click on the lock symbol</div>
+        <img src="img/stake/locked.jpg" uk-img>
+       </div>
+       <div class="uk-padding-small">
+        <div class="uk-margin-bottom">After the popup comes up click on the check box to the left of the words "For anonymization, automint, and staking only"</div>
+         <img src="img/stake/check-mark-unlock.jpg" uk-img>
+        </div>
+       <div class="uk-padding-small">
+        <div class="uk-margin-bottom">Enter your password and click the "Ok" button</div>
+         <img src="img/stake/unlock-wallet.jpg" uk-img>
+        </div>
+        <div class="uk-padding-small">
+         <div class="uk-margin-bottom">After sometime and depending on how many coins are staking the lock icon in the bottom right of the wallet window will change to gold. Hovering over it with your cursor will confirm that your wallet is staking. You will need to leave your wallet open and your computer own to keep receiving your rewards.</div>
+          <img src="img/stake/staking-active.jpg" uk-img>
+         </div>
+        <div class="uk-padding-small">
+         <div class="uk-margin-bottom">Enjoy your staking rewards and thank you supporting the ohmcoin network. If you have any questions please don't hesitate to ask on our <a href="https://discord.gg/Zw84KHA">discord</a></div>
+        </div>
       </div>
     </div>
   </div><!-- end staking guide -->
@@ -372,10 +393,10 @@ karmanodeprivkey=paste-privkey-here
       <div class="uk-text-center uk-width-1-1 uk-margin-top">
         <h2>Download</h2>
       </div>
-      <ul class="uk-child-width-1-2@l uk-child-width-1-1@m" uk-grid="">
+      <ul class="uk-child-width-1-2@l uk-child-width-1-1@m" uk-grid>
         <li class="uk-flex uk-flex-center uk-flex-middle">
           <div class="uk-width-4-5@m uk-flex uk-flex-center uk-flex-middle" uk-parallax="y: 90,-90; easing: 0; media:@l">
-            <div class="uk-child-width-1-2 uk-flex uk-flex-center uk-flex-middle" uk-grid="">
+            <div class="uk-child-width-1-2 uk-flex uk-flex-center uk-flex-middle" uk-grid>
               <div>
                 <div class="uk-flex-center uk-text-center ohm-glow">
                   <a href="https://github.com/theohmproject/ohmcoin/releases/download/3.0.3.1/Ohmcoin-Qt.dmg" target="_blank"><img class="ohm-grow" alt="macOS Download" src="img/wallet-logo/apple_logo.png" width="100" uk-img=""></a>
@@ -411,7 +432,7 @@ karmanodeprivkey=paste-privkey-here
   </div>
   <!-- Begin Exchanges and Partners-->
   <section class="uk-section uk-section-default uk-flex uk-flex-center uk-width-1-1">
-    <ul class="uk-width-1-1 uk-flex uk-flex-center" uk-grid="">
+    <ul class="uk-width-1-1 uk-flex uk-flex-center" uk-grid>
       <li class="uk-flex uk-flex-center uk-width-1-2@l uk-width-1-2@m">
         <ul class="uk-list uk-card uk-card-default uk-card-hover uk-card-secondary uk-padding" style="width: 30em;" uk-margin="" uk-scrollspy="target: &gt; li; delay: 150; cls: uk-animation-slide-bottom-medium">
           <li>
@@ -456,7 +477,7 @@ karmanodeprivkey=paste-privkey-here
   <!-- LOGOS -->
   <div class="uk-section uk-section-small uk-section-muted">
     <div class="uk-container uk-container-small">
-      <div class="uk-child-width-1-4 uk-child-width-expand@m logos-grid" uk-grid="" uk-scrollspy="cls: uk-animation-scale-down; target: &gt; div &gt; a &gt; img; delay: 100">
+      <div class="uk-child-width-1-4 uk-child-width-expand@m logos-grid" uk-grid uk-scrollspy="cls: uk-animation-scale-down; target: &gt; div &gt; a &gt; img; delay: 100">
         <div>
           <a class="" href="https://discord.gg/5KgQDku"><img alt="Discord" border="0" class="" src="img/social/discord.png"></a>
         </div>

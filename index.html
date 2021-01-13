@@ -145,7 +145,15 @@
       <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid="">
         <div class="uk-padding-large">
           <h1>Staking Guide</h1>
-          <p>Simple Guild on how to stake</p>
+          <div>Staking is the simplest way to earn ohmcoin, the following guide will help you get started.</div>
+          <div>
+           <h4>Requirements</h4>
+            <ul>
+            <li>Internet connection</li>
+            <li>A computer that you can leave on with 8GB of ram or higher to allow for system services and other applications</li>
+            <li>A wallet with ohmcoin available</li>
+            </ul>
+          </div>
         </div>
         <div class="uk-background-cover" style="background-image: url('img/photo.jpg');" uk-height-viewport></div>
       </div>
@@ -160,7 +168,7 @@
               <div class="uk-background-contain uk-height-medium" style="background-image: url('img/karmanode/karmanode-knot.png');" uk-height-viewport="offset-top: 20;offset-bottom: 20;"></div>
               <div class="uk-padding-large">
                 <h1>Karmnode Guide</h1>
-                <p>Staking Ohmcoin is not the only way to support the ohmcoin network, by setting up a karmanode you can earn rewards while helping process transactions. The following guide will help you get started</p>
+                <div>Staking Ohmcoin is not the only way to support the ohmcoin network, by setting up a karmanode you can earn rewards while helping process transactions. The following guide will help you get started</div>
                 <div>
                   <h4>Requirements</h4>
                   <ul>
@@ -185,9 +193,9 @@
             <div id="prep" class="uk-width-1-1 uk-flex-middle" uk-height-viewport>
               <div class="uk-padding-large">
                 <h1>VPS Setup and Security</h1>
-                <p>Using your computer use a terminal to log into your VPS root account via ssh<br>
+                <div>Using your computer use a terminal to log into your VPS root account via ssh<br>
                 example: ssh root@127.0.0.1<br>
-                Note: the following can be copy and pasted into your terminal. Please pay close attention to notes in each section.</p>
+                Note: the following can be copy and pasted into your terminal. Please pay close attention to notes in each section.</div>
                 <h4>Set up swap space(virtual memory)</h4>
                 <div id="swap" class="uk-margin-right uk-background-muted uk-padding-small">
                   fallocate -l 4G /swapfile &amp;& chmod 600 /swapfile &amp;& mkswap /swapfile &amp;& swapon /swapfile &amp;& echo -e "/swapfile none swap sw 0 0 \n" &gt;&gt; /etc/fstab
@@ -339,7 +347,7 @@ karmanodeprivkey=paste-privkey-here
             </div><!-- end karmanode setup -->
       </div>
       <!-- begin karmanode guide nav -->
-      <div class="uk-position-bottom uk-position-fixed uk-dark uk-background-secondary">
+      <div class="uk-position-bottom uk-position-fixed uk-background-secondary">
         <ul class="uk-subnav uk-subnav-pill uk-flex uk-flex-center uk-margin-top">
           <li>
             <a class="uk-border-pill uk-button-primary" href="#intro" uk-scroll>Intro</a>
@@ -359,12 +367,12 @@ karmanodeprivkey=paste-privkey-here
     </div>
   </div><!-- end karmanode guide desktop-->
   <section id="download" class="uk-cover-container overlay-wrap">
-    <img src="img/wallet-bg.jpg" alt="" uk-cover="" uk-img="">
+    <img src="img/wallet-bg.jpg" alt="" uk-cover uk-img>
     <div class="uk-container uk-position-z-index uk-position-relative uk-section uk-section-large uk-light uk-padding-remove">
       <div class="uk-text-center uk-width-1-1 uk-margin-top">
         <h2>Download</h2>
       </div>
-      <ul class="uk-child-width-1-2" uk-grid="">
+      <ul class="uk-child-width-1-2@l uk-child-width-1-1@m" uk-grid="">
         <li class="uk-flex uk-flex-center uk-flex-middle">
           <div class="uk-width-4-5@m uk-flex uk-flex-center uk-flex-middle" uk-parallax="y: 90,-90; easing: 0; media:@l">
             <div class="uk-child-width-1-2 uk-flex uk-flex-center uk-flex-middle" uk-grid="">
@@ -403,8 +411,8 @@ karmanodeprivkey=paste-privkey-here
   </div>
   <!-- Begin Exchanges and Partners-->
   <section class="uk-section uk-section-default uk-flex uk-flex-center uk-width-1-1">
-    <ul class="uk-width-2-2 uk-flex uk-flex-center" uk-grid="">
-      <li class="uk-flex uk-flex-center uk-width-1-2">
+    <ul class="uk-width-1-1 uk-flex uk-flex-center" uk-grid="">
+      <li class="uk-flex uk-flex-center uk-width-1-2@l uk-width-1-2@m">
         <ul class="uk-list uk-card uk-card-default uk-card-hover uk-card-secondary uk-padding" style="width: 30em;" uk-margin="" uk-scrollspy="target: &gt; li; delay: 150; cls: uk-animation-slide-bottom-medium">
           <li>
             <h4 class="uk-margin uk-text-center">Our Exchanges<br></h4>
@@ -428,7 +436,7 @@ karmanodeprivkey=paste-privkey-here
           </li>
         </ul>
       </li>
-      <li class="uk-flex uk-flex-center uk-width-1-2">
+      <li class="uk-flex uk-flex-center uk-width-1-2@l uk-width-1-1@m">
         <ul class="uk-list uk-card uk-card-default uk-card-hover uk-card-secondary uk-padding" style="width: 30em;" uk-margin="" uk-scrollspy="target: &gt; li; delay: 150; cls: uk-animation-slide-bottom-medium">
           <li>
             <h4 class="uk-margin uk-text-center">Our Partners<br></h4>

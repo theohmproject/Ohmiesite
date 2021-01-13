@@ -12,7 +12,8 @@ Update more images.
 Clean up html, js and css where applicable.
 Add more features such as lazy loading for modals
 Add TOS
-Add Legal about trading crypto and that there is no promise or expectation of future price "implied or otherwise".
+Add Legal about trading crypto and that there is no promise or expectation of future price "implied or otherwise"
+Add team section...
 
 
 ####  License
